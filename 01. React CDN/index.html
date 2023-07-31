@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">Not Rendered</div>
+
+
+    <!-- Make this Structure with REACT -->
+    <!-- Task 2
+    <div id="container">
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+    </div> 
+-->
+
+
+    <!-- write html with react -->
+    <!-- Step 1 : Import CDN links -->
+    <!-- Step2 : Create Elements which u wana insert -->
+    <!-- let's create h1 with id heading1 and text content as Namaste -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script> 
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script>
+        // From JS
+        // const heading1 = document.createElement("h1");
+        // heading1.innerHTML = "Namste EveryOne from JS"
+        // const root = document.getElementById("root");
+        // root.append(heading1);
+// -----------------------------------------------------------------------------------------------------------------------------------------
+// React Start
+        // Task 1
+        // const heading1 = React.createElement("h1",{id : "heading1"}, "Namaste From React");
+        // const root = ReactDOM.createRoot(document.getElementById("root"));
+        // root.render(heading1);
+
+        
+        const heading1 = React.createElement("h1",{id : "heading1"}, "Heading 1");
+        const heading2 = React.createElement("h2",{id : "heading2"}, "Heading 2");
+        const container = React.createElement("div", {class : "container"}, [heading1, heading2]);
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(container);
+    </script>
+</body>
+</html>
