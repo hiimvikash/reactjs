@@ -1,3 +1,4 @@
+# 01. Hello World App
 ```js
 //-------------------------------------------------------01. Hello World App-------------------------------------------------------------
 
@@ -38,12 +39,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 
 // ------Main.jsx END
-
-
-
-
-
-
+```
+# 02. Counter App
+```js
 //-------------------------------------------------------02. counter-app----------------------------------------------------------------
 
 // App.jsx START
@@ -76,14 +74,11 @@ function App() {
 
 export default App
 // App.jsx END
+```
+![image](https://github.com/hiimvikash/Namaste-React/assets/71629248/623ec7be-4737-4cd1-94ed-bedd79e1daf7)
 
-
-
-
-
-
-
-
+# 03. React Props
+```js
 //---------------------------------------------------------03-React Props-------------------------------------------------------------
 
 // App.jsx START
@@ -157,7 +152,87 @@ function Card({btnText: bt = "read-default", device:dn = "Default Laptop", arr, 
 export default Card
 
 //Card.jsx END
-
 ```
 
-![image](https://github.com/hiimvikash/Namaste-React/assets/71629248/623ec7be-4737-4cd1-94ed-bedd79e1daf7)
+# 04. bg-Changer App
+
+```js
+// App.jsx START
+import Btn from './Button';
+import './App.css'
+import { useState } from 'react'
+
+function App() {
+  let[color, setColor] = useState("white");
+
+  return (
+    <div className='main' style={{backgroundColor : color}}>
+      <div className="footer">
+        <Btn color = "red" setColor = {setColor}/>
+        <Btn color = "yellow" setColor = {setColor}/>
+        <Btn color = "green" setColor = {setColor}/>
+        <Btn color = "blue" setColor = {setColor}/>
+        <Btn color = "violet" setColor = {setColor}/>
+        <Btn color = "purple" setColor = {setColor}/>
+        <Btn color = "black" setColor = {setColor}/>
+        
+      </div>
+    </div>
+  )
+}
+export default App
+// App.jsx END
+
+// Button.jsx START
+
+export default function Btn({color, setColor}){
+
+    const btnstyle = {
+        fontSize : "18px",
+        padding : "0.5em",
+        width : "5em",
+        borderRadius : "10px",
+        backgroundColor : color,
+        color: "white",
+        border : "none"
+    }
+    function changeColor(){
+      setColor(color);
+    }
+    return(
+        <button style={btnstyle} onClick={changeColor}>{color}</button>
+    )
+}
+// Button.jsx END
+
+
+
+// App.css START
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  transition: all 0.5s;
+}
+.footer{
+  width : 40%;
+  background-color: rgb(54, 100, 100);
+  padding: 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  border-radius: 10px;
+}
+// App.css END
+```
+
