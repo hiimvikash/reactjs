@@ -166,7 +166,7 @@ function App() {
   let[color, setColor] = useState("white");
 
   return (
-    <div className='main' style={{backgroundColor : color}}>
+    <div className='main' style={{backgroundColor : color,  width:"100vw"}}>
       <div className="footer">
         <Btn color = "red" setColor = {setColor}/>
         <Btn color = "yellow" setColor = {setColor}/>
