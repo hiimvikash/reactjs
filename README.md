@@ -247,9 +247,8 @@ export default function Btn({color, setColor}){
 - This side effect will now run on every single render of the component
 - ```js
   useEffect(() => {
-  console.log("This is a side effect")
-})
-```
+  console.log("This is a side effect")})
+  ```
 - If the dependency array is empty, the effect runs only once, after the initial render.
 
   
