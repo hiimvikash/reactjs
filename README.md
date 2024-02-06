@@ -240,7 +240,7 @@ export default function Btn({color, setColor}){
 - [State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
 - [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
 - [useState()](https://react.dev/reference/react/useState)
-# 06.useEffect()
+# 06.useEffect() : whenever there is changed in dependencies CB fun inside useEffect() is called
 ```js
 import { useState, useEffect } from 'react'
 
