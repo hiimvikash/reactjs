@@ -238,4 +238,5 @@ export default function Btn({color, setColor}){
 
 # 05.Little Concept to read : 
 - [State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
+- [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
 - [useState()](https://react.dev/reference/react/useState)
