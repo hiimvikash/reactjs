@@ -236,4 +236,6 @@ export default function Btn({color, setColor}){
 // App.css END
 ```
 
-# [05.State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
+# 05.Little Concept to read : 
+- [State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
+- [useState()](https://react.dev/reference/react/useState)
