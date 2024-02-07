@@ -420,3 +420,36 @@ export default FormValidation;
   - We perform validation checks on the input values and, if errors are found, we highlight the respective input fields by adding a red border using imperative DOM manipulation.
   - The highlightField function is used to apply styling to input fields with validation errors using the ref property.
 - This approach allows us to manage mutable values (the input fields) imperatively without the need to store their state in React state variables <b>if we would have used stateVariable for input fields then that would caused too many re-renders which is not good for perfomance.</b>
+
+# 08. useMemo() hook
+- To identify the problem see the below code :-
+    ```js
+      function App(){
+        const [number, setNumber] = useState(0);
+        const [dark, setDark] = useState(false);
+        const dn = slowFunction(number);
+      
+        const styleTheme = {
+          backgroundColor : dark ? "black" : "white",
+          color : dark ? "white" : "black"
+        }
+      
+        function changeTheme(){
+          setDark(!dark);
+        }
+      return(
+        <>
+        <input type="number" value={number} onChange={(e)=>setNumber(e.target.value)}/>
+        <button onClick={changeTheme}>Change Theme</button>
+        <h1 style={styleTheme}>{dn}</h1>
+        </>
+      )
+    }
+    
+    function slowFunction(num){
+      for(let i =0; i<1000000000; i++){}
+      return num*2;
+    }
+    export default App;
+    ```
+- Here in the above application the problem is <b>Even if we want to change the theme it takes time bcz of slow function, bcz it's start rendering from top when state is changed for Darktheme</b>
