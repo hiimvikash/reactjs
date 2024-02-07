@@ -318,15 +318,15 @@ export default App
 
   - Accessing and manipulating DOM elements imperatively.
   - Storing values that need to persist across renders without causing re-renders <b>like render count</b>
-         ```js
-       function App(){
-         let[msg, setmsg] = useState("hi")
-         let rc = useRef(0);
+    ```js
+    function App(){
+      let[msg, setmsg] = useState("hi")
+      let rc = useRef(0);
           
-         useEffect(()=>{
-             rc.current = rc.current+1;
-         })
-         return(
+       useEffect(()=>{
+          rc.current = rc.current+1;
+        })
+        return(
            <>
              <input style={styles} type="text" value={msg} onChange={(e)=>{setmsg(e.target.value)}} />
              <h3>The message is : "{msg}"</h3>
