@@ -452,4 +452,4 @@ export default FormValidation;
     }
     export default App;
     ```
-- Here in the above application the problem is <b>Even if we want to change the theme it takes time bcz of slow function, bcz it's start rendering from top when state is changed for Darktheme</b>
+- Here in the above application the problem is <b>Even if we want to change the theme it takes time bcz of slow function, as it start rendering from top when state is changed for Darktheme</b>
