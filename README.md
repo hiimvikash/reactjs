@@ -245,46 +245,46 @@ export default function Btn({color, setColor}){
 - It accepts a function as its first argument and an optional array of dependencies as its second argument.
 - The function represents the side effect to perform. The dependency array specifies when the effect should be executed based on changes in specific values.
 - This side effect will now run on every single render of the component
-- ```js
-  useEffect(() => {
-  console.log("This is a side effect")})
-  ```
+   ```js
+    useEffect(() => {
+    console.log("This is a side effect")})
+    ```
 - If the dependency array is empty, the effect runs only once, after the initial render.
-
+- this hook is used in fetching API with state change i.e., with different changing URL
   
-```js
-import { useState, useEffect } from 'react'
-
-
-function App() {
-
-  let [resourceType, setResourceType] = useState('posts');
-  let [items, setItems] = useState([]);
-
-  useEffect(()=>{
-    fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
-    .then(res=>res.json())
-    .then(json=>setItems(json))
-
-  }, [resourceType])
-
-  return (
-    <>
-      <button onClick={()=> setResourceType('posts')}>posts</button>
-      <button onClick={()=> setResourceType('users')}>users</button>
-      <button onClick={()=> setResourceType('comments')}>comments</button>
-      <h1>{resourceType}</h1>
-
-      {
-        items.map(item => <pre>{JSON.stringify(item)}</pre>)
-      }
-    </>
+    ```js
+    import { useState, useEffect } from 'react'
     
-  )
-}
-
-export default App
-```
+    
+    function App() {
+    
+      let [resourceType, setResourceType] = useState('posts');
+      let [items, setItems] = useState([]);
+    
+      useEffect(()=>{
+        fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+        .then(res=>res.json())
+        .then(json=>setItems(json))
+    
+      }, [resourceType])
+    
+      return (
+        <>
+          <button onClick={()=> setResourceType('posts')}>posts</button>
+          <button onClick={()=> setResourceType('users')}>users</button>
+          <button onClick={()=> setResourceType('comments')}>comments</button>
+          <h1>{resourceType}</h1>
+    
+          {
+            items.map(item => <pre>{JSON.stringify(item)}</pre>)
+          }
+        </>
+        
+      )
+    }
+    
+    export default App
+    ```
 
 # 07. useRef() hook
 
