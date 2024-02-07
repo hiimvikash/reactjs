@@ -285,3 +285,104 @@ function App() {
 
 export default App
 ```
+
+# 07. useRef() hook
+
+- Concept:
+  - useRef is a built-in React Hook that allows you to create a mutable reference to a DOM element or a value that persists across renders without causing a re-render.
+- Mutable Reference:
+
+  - useRef creates a mutable object that persists for the entire lifecycle of the component.
+  - Unlike state variables, changing the value of a useRef variable does not trigger a re-render of the component.
+- DOM References:
+
+  - One common use case of useRef is to reference DOM elements directly within functional components.
+  - You can attach a ref attribute to a JSX element and assign it the result of useRef. This allows you to manipulate the DOM element programmatically.
+- Initial Value:
+
+  - When creating a useRef variable, you can provide an initial value as an argument to useRef(initialValue).
+  - The initial value can be any JavaScript value, such as null, undefined, an object, or a primitive value.
+- Accessing DOM Elements:
+
+  - After attaching a ref attribute to a JSX element, you can access the underlying DOM element using the current property of the useRef object.
+  - For example, ref.current provides access to the DOM node associated with the ref.
+- Persisting Values:
+
+  - useRef can also be used to persist values across renders without causing re-renders.
+  - Since changing the value of a useRef variable doesn't trigger a re-render, it's suitable for storing values that don't need to be part of the component state.
+- Side Effects:
+
+  - useRef is often used to store references to values or objects that should not trigger re-renders but may be used for side effects or imperative code, like error handling of forms input.
+
+- Use Cases:
+
+  - Accessing and manipulating DOM elements imperatively.
+  - Storing values that need to persist across renders without causing re-renders <b>like render count</b>
+  - Managing focus, text selection, or other imperative operations.
+  - Storing mutable values that are not part of the component state <b>like error handling of input values</b>
+
+## Storing mutable values that are not part of the component state like error handling of input values
+- Suppose you're building a form validation feature in a React project. You might want to highlight input fields that have validation errors. Instead of adding a state variable for each input field to manage its error state, you can use useRef to store references to the input fields and manage their error state imperatively.
+```js
+import React, { useRef } from 'react';
+
+const FormValidation = () => {
+  // Refs for input fields
+  const usernameRef = useRef(null);
+  const emailRef = useRef(null);
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform validation
+    const username = usernameRef.current.value;
+    const email = emailRef.current.value;
+
+    // Check username validity
+    if (!username || username.trim() === '') {
+      highlightField(usernameRef);
+    }
+
+    // Check email validity
+    if (!email || !isValidEmail(email)) {
+      highlightField(emailRef);
+    }
+  };
+
+  // Function to highlight input fields with errors
+  const highlightField = (ref) => {
+    ref.current.style.border = '2px solid red';
+  };
+
+  // Function to validate email format
+  const isValidEmail = (email) => {
+    // Regular expression for email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username" ref={usernameRef} />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" ref={emailRef} />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default FormValidation;
+```
+- In this example:
+
+  - We create useRef variables usernameRef and emailRef to store references to the username and email input fields, respectively.
+  - When the form is submitted, we retrieve the values from the input fields using usernameRef.current.value and emailRef.current.value.
+  - We perform validation checks on the input values and, if errors are found, we highlight the respective input fields by adding a red border using imperative DOM manipulation.
+  - The highlightField function is used to apply styling to input fields with validation errors using the ref property.
+- This approach allows us to manage mutable values (the input fields) imperatively without the need to store their state in React state variables <b>if we would have used stateVariable for input fields then that would caused too many re-renders which is not good for perfomance.</b>
