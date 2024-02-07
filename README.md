@@ -318,6 +318,40 @@ export default App
 
   - Accessing and manipulating DOM elements imperatively.
   - Storing values that need to persist across renders without causing re-renders <b>like render count</b>
+         ```js
+       function App(){
+         let[msg, setmsg] = useState("hi")
+         let rc = useRef(0);
+          
+         useEffect(()=>{
+             rc.current = rc.current+1;
+         })
+         return(
+           <>
+             <input style={styles} type="text" value={msg} onChange={(e)=>{setmsg(e.target.value)}} />
+             <h3>The message is : "{msg}"</h3>
+              <p> The render count is {rc.current}</p>
+           </>
+         )
+       } 
+    ```
+  - store history of state variable.
+       ```js
+       function App(){
+         let[msg, setmsg] = useState("hi")
+         let prevmsg = useRef(msg);
+          
+         useEffect(()=>{
+             prevmsg.current = msg;
+         }, [msg])
+         return(
+           <>
+             <input style={styles} type="text" value={msg} onChange={(e)=>{setmsg(e.target.value)}} />
+             <h3>The message is : "{msg}" and the message was "{prevmsg.current}"</h3>
+           </>
+         )
+       } 
+    ```
   - Managing focus, text selection, or other imperative operations.
   - Storing mutable values that are not part of the component state <b>like error handling of input values</b>
 
