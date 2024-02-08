@@ -356,7 +356,7 @@ export default function Btn({color, setColor}){
   - Managing focus, text selection, or other imperative operations.
   - Storing mutable values that are not part of the component state <b>like error handling of input values</b>
 
-## Storing mutable values that are not part of the component state like error handling of input values
+#### Storing mutable values that are not part of the component state like error handling of input values
 - Suppose you're building a form validation feature in a React project. You might want to highlight input fields that have validation errors. Instead of adding a state variable for each input field to manage its error state, you can use useRef to store references to the input fields and manage their error state imperatively.
 ```js
 import React, { useRef } from 'react';
