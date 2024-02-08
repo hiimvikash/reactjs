@@ -438,6 +438,13 @@ export default FormValidation;
         function changeTheme(){
           setDark(!dark);
         }
+
+        // problem 2 : start (consider this after solving 1st problem)
+          useEffect(()=>{
+             console.log("Theme changed");
+          }, [styleTheme])
+        // problem 2 : end
+    
       return(
         <>
         <input type="number" value={number} onChange={(e)=>setNumber(e.target.value)}/>
@@ -453,11 +460,31 @@ export default FormValidation;
     }
     export default App;
     ```
-  #### Problem 1:-
+  #### Problem 1 :-
   - Here in the above application the problem is <b>Even if we change the theme it start re-rendering from top to bottom and our slowfun() is called</b> which is wrong bcz <b>return of slowFun() only depend on ```number```</b>.
   - Due to this even theme changing delays to effect.
-  #### Solution 1:-
+  #### Solution 1 :-
   - initialize dn like this ```const dn = useMemo(()=>slowFunction(number), [number])```.
   - here slowFuntion will return integer and will be stored in ```dn```.
   - useMemo(callbackFun, dependenciesArray[]) it will only execute CB() when there is change in dependency.
   - so now problem is solved : <b>it will cached the memonised value, slowFunction will be executed only when there is change in dependency ```number``` to recalculate the memonised value.</b>
+  #### Problem 2 :-
+  - If you're implementing useEffect() for dependency like arrays or object then <b>CB() inside useEffect is rendered every single time</b>, this is bcz <b>each time when component re-render arrays and objects are initialized to new memory location</b> so for useEffect() it feels like dependency is changed.
+  - Due to above problem useEffect() will run even when we change other state-variable.
+  #### Solution 2 :-
+  - We will wrap returning object inside useMemo CB() and pass the dependency as ```dark```(state-variable).
+  - If we do this then newObject will be return only when there is change in ```dark``` else it will have the memonised object.
+  - so useEffect CB() will execute only when there is <b>change in object-reference</b> and change in object-reference is possible only when there is change in ```dark```.
+  - which means useEffect CB() will be called only when there is change in ```dark```, which we wanted.
+      ```js
+        const styleTheme =  useMemo(()=>{
+          return {
+            backgroundColor : dark ? "black" : "white",
+            color : dark ? "white" : "black"
+          }
+        }, [dark])
+
+        useEffect(()=>{
+          console.log("Theme changed");
+        }, [styleTheme])
+      ```
