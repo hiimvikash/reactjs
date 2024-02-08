@@ -420,7 +420,7 @@ export default FormValidation;
   - When the form is submitted, we retrieve the values from the input fields using usernameRef.current.value and emailRef.current.value.
   - We perform validation checks on the input values and, if errors are found, we highlight the respective input fields by adding a red border using imperative DOM manipulation.
   - The highlightField function is used to apply styling to input fields with validation errors using the ref property.
-- This approach allows us to manage mutable values (the input fields) imperatively without the need to store their state in React state variables <b>if we would have used stateVariable for input fields then that would caused too many re-renders which is not good for perfomance.</b>
+- This approach allows us to manage mutable values (the input fields) imperatively without the need to store their state in React state variables <b>if we would have used state-variable for input fields then that would caused too many re-renders which is not good for perfomance.</b>
 
 # 08. useMemo() hook
 - To identify the problem see the below code :-
