@@ -453,8 +453,10 @@ export default FormValidation;
     }
     export default App;
     ```
-- Here in the above application the problem is <b>Even if we change the theme it start re-rendering from top to bottom</b> which means our slowfun() is called every time.
-  #### solution :-
+  #### Problem 1:-
+  - Here in the above application the problem is <b>Even if we change the theme it start re-rendering from top to bottom and our slowfun() is called</b> which is wrong bcz <b>return of slowFun() only depend on ```number```</b>.
+  - Due to this even theme changing delays to effect.
+  #### Solution 1:-
   - initialize dn like this ```const dn = useMemo(()=>slowFunction(number), [number])```.
   - here slowFuntion will return integer and will be stored in ```dn```.
   - useMemo(callbackFun, dependenciesArray[]) it will only execute CB() when there is change in dependency.
