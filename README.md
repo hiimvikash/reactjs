@@ -241,6 +241,8 @@ export default function Btn({color, setColor}){
 - [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
 - [useState()](https://react.dev/reference/react/useState)
 - always use ```setSomething``` **inside some eventhandler** to avoid infinite loop
+- [conditional-rendering](https://react.dev/learn/conditional-rendering)
+- [rendering-lists](https://react.dev/learn/rendering-lists)
 # 06.useEffect() : whenever there is changed in dependencies CB fun inside useEffect() is called
 - useEffect Hook: useEffect is a built-in React Hook used for handling side effects in functional components. Side effects may include data fetching, subscriptions, or manually changing the DOM.
 - It accepts a function as its first argument and an optional array of dependencies as its second argument.
@@ -559,3 +561,4 @@ export default FormValidation;
   }
   export default App;
   ```
+  
