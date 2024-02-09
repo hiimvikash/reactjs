@@ -523,3 +523,39 @@ export default FormValidation;
 # 10. useCallback()  
 - useMemo(): Returns and stores the calculated value of a function in a variable.
 - useCallBack(): Returns and stores the actual function itself in a variable.
+  ```js
+    function App(){
+    const[num, setNum] = useState(1);
+    const[dark, setDark] = useState(false);
+  
+    // getItems will get the full CB(), due to useCallback the refrencial equality will not change untill unless num is changed
+    const getItems = useCallback(()=>{
+      return [num, num+1, num+2]
+  }, [num])
+  
+    const theme = {
+      backgroundColor : dark? "black" : "white",
+      color : dark? "white" : "black"
+    }
+    return(
+      <div style = {theme}>
+        <input type="number" value={num} onChange={e=>setNum(parseInt(e.target.value))} />
+        <button onClick={()=> setDark(!dark)}>Toggle theme</button>
+        <List getItems={getItems}/>
+      </div>
+    )
+  } 
+  
+  function List({getItems}){
+    const [items, setItems] = useState([]);
+  
+    // here if I don't implement setItems inside useEffect() then it will cause infinite re-render
+    useEffect(()=>{
+      console.log("getting items");
+      setItems(getItems())
+    }, [getItems])
+    
+    return items.map((item, i) => <div key={i}>{item}</div>)
+  }
+  export default App;
+  ```
