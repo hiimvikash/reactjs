@@ -489,7 +489,7 @@ export default FormValidation;
         }, [styleTheme])
       ```
 # 09. Working with lists and Arrays in JSX
-  #### Make a list of recipes from this array! For each recipe in the array, display its name as an h2 and list its ingredients in a ul
+  - #### Make a list of recipes from this array! For each recipe in the array, display its name as an h2 and list its ingredients in a ul
   ```js
     const recipes = [{
     id: 'greek-salad',
@@ -520,3 +520,6 @@ export default FormValidation;
   return <ul>{listItems}</ul>;
   }
   ```
+# 10. useCallback()  
+- useMemo(): Returns and stores the calculated value of a function in a variable.
+- useCallBack(): Returns and stores the actual function itself in a variable.
