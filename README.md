@@ -318,7 +318,7 @@ export default function Btn({color, setColor}){
 - Use Cases:
 
   - Accessing and manipulating DOM elements imperatively.
-  - Storing values that need to persist across renders without causing re-renders <b>like render count</b>
+  - Storing values that need to persist across renders without causing re-renders, <b>Eg - like render count</b>
     ```js
     function App(){
       let[msg, setmsg] = useState("hi")
