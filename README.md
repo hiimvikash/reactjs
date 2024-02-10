@@ -242,7 +242,6 @@ export default function Btn({color, setColor}){
 - [useState()](https://react.dev/reference/react/useState)
 - always use ```setSomething``` **inside some eventhandler** to avoid infinite loop
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
-- [rendering-lists](https://react.dev/learn/rendering-lists)
 # 06.useEffect() : whenever there is changed in dependencies CB fun inside useEffect() is called
 - useEffect Hook: useEffect is a built-in React Hook used for handling side effects in functional components. Side effects may include data fetching, subscriptions, or manually changing the DOM.
 - It accepts a function as its first argument and an optional array of dependencies as its second argument.
@@ -358,7 +357,7 @@ export default function Btn({color, setColor}){
   - Managing focus, text selection, or other imperative operations.
   - Storing mutable values that are not part of the component state <b>like error handling of input values</b>
 
-#### Storing mutable values that are not part of the component state like error handling of input values
+##### Storing mutable values that are not part of the component state like error handling of input values
 - Suppose you're building a form validation feature in a React project. You might want to highlight input fields that have validation errors. Instead of adding a state variable for each input field to manage its error state, you can use useRef to store references to the input fields and manage their error state imperatively.
 ```js
 import React, { useRef } from 'react';
@@ -490,7 +489,7 @@ export default FormValidation;
           console.log("Theme changed");
         }, [styleTheme])
       ```
-# 09. Working with lists and Arrays in JSX
+# 09. Working with lists and Arrays in JSX - [rendering-lists](https://react.dev/learn/rendering-lists)
   - #### Make a list of recipes from this array! For each recipe in the array, display its name as an h2 and list its ingredients in a ul
   ```js
     const recipes = [{
