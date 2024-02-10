@@ -571,7 +571,8 @@ export default FormValidation;
       let result = ''; // Initialize an empty string to store the generated text
   
       for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length); // Generate a random index within the length of the characters string
+          // Generate a random index within the length of the characters string
+          const randomIndex = Math.floor(Math.random() * characters.length);
           result += characters.charAt(randomIndex); // Append the character at the random index to the result string
       }
   
