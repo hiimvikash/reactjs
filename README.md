@@ -562,6 +562,10 @@ export default FormValidation;
   ```
 # 11. Password Generator Project
   #### To generate random text of a particular length from a string of characters in JavaScript, you can follow these steps:
+  - Math.random() generates number from [0,1) i.e., min is ```0``` and max is ```0.99999999```. 
+  - let's say charaters string is of length 52 therefore available index is from ```0``` to ```51```.
+  - so we want our ```randomIndex``` to be a available index.
+  - ```charcterLength*Math.Random``` will always be inclusive 51.9999999 and 52 is impossible coz <b>Math.random() is generating number below 1.</b>
   ```js
     function generateRandomText(length, characters) {
       let result = ''; // Initialize an empty string to store the generated text
