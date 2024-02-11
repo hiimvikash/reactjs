@@ -655,4 +655,117 @@ export default FormValidation;
 
   export default App
   ```
+# 12. Currency Convertor Project
+- ```useCurrencyInfo.js``` is a <b>hook</b>(assume it as function) which take input as the Fromcurrency and gives the conversion-rate for other currency [click here for API](https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json).
+- ```InputBox.jsx``` is a component which contains ```label```, ```input```, & ```selection```.
+  #### useCurrencyInfo.js
+  ```js
+  import {useEffect, useState} from "react"
+  function useCurrencyInfo(currency){
+    const [data, setData] = useState({})
+    useEffect(() => {
+        fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
+        .then((res) => res.json())
+        .then((res) => setData(res[currency]))
+    }, [currency])
+    console.log(data);
+    return data
+  }
+
+  export default useCurrencyInfo;
+  ```
+  #### App.jsx
+  ```js
+  import { useState } from 'react'
+  import {InputBox} from './components/InputBox'
+  import useCurrencyInfo from './hooks/useCurrencyInfo'
+  import './App.css'
   
+  function App() {
+  
+    const [amount, setAmount] = useState(0)
+    const [from, setFrom] = useState("usd")
+    const [to, setTo] = useState("inr")
+    const [convertedAmount, setConvertedAmount] = useState(0)
+  
+    const currencyInfo = useCurrencyInfo(from);
+    
+  
+    const options = Object.keys(currencyInfo)
+    
+    const convert = () => {
+      setConvertedAmount(amount * currencyInfo[to])
+    }
+  
+    return (
+      <form onSubmit={(e) => { e.preventDefault(); convert()}}>
+            <InputBox
+              label="From"
+              amount={amount}
+              currencyOptions={options}
+              onCurrencyChange={(currency) => setFrom(currency)}
+              onAmountChange={(amount) => setAmount(amount)}
+              selectCurrency={from} 
+            />
+         
+            <InputBox
+                label="To"
+                amount={convertedAmount}
+                currencyOptions={options}
+                onCurrencyChange={(currency) => setTo(currency)}
+                selectCurrency={to}
+                amountDisable
+            />
+                      
+            <button type="submit">
+                Convert {from.toUpperCase()} to {to.toUpperCase()}
+            </button>
+      </form>
+  );
+  }
+  export default App
+  ```
+  #### InputBox.jsx
+  ```js
+  import React, {useId} from 'react'
+
+    export function InputBox({
+        label,
+        amount,
+        onAmountChange,
+        onCurrencyChange,
+        currencyOptions = [],
+        selectCurrency = "usd",
+        amountDisable = false,
+        currencyDisable = false,
+      }) {
+       const amountInputId = useId()
+    
+        return (
+            <div>
+                <div>
+                    <label htmlFor={amountInputId}>
+                        {label}
+                    </label>
+                    <input
+                        id={amountInputId}
+                        type="number"
+                        placeholder="Amount"
+                        disabled={amountDisable}
+                        value={amount}
+                        onChange={(e) => onAmountChange && onAmountChange(parseInt(e.target.value))}
+                    />
+                </div>
+               
+                    <p>Currency Type</p>
+                    <select value={selectCurrency} onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)} disabled={currencyDisable}>
+                          {currencyOptions.map((currency) => (
+                              <option key={currency} >{currency}</option>)
+                          )}
+                    </select>
+                
+            </div>
+        );
+    }
+
+  ```
