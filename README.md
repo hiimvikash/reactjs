@@ -689,7 +689,6 @@ export default FormValidation;
     const [convertedAmount, setConvertedAmount] = useState(0)
   
     const currencyInfo = useCurrencyInfo(from);
-    
   
     const options = Object.keys(currencyInfo)
     
@@ -697,6 +696,7 @@ export default FormValidation;
       setConvertedAmount(amount * currencyInfo[to])
     }
   
+   
     return (
       <form onSubmit={(e) => { e.preventDefault(); convert()}}>
             <InputBox
@@ -704,8 +704,8 @@ export default FormValidation;
               amount={amount}
               currencyOptions={options}
               onCurrencyChange={(currency) => setFrom(currency)}
-              onAmountChange={(amount) => setAmount(amount)}
-              selectCurrency={from} 
+              setAmount={(amount) => setAmount(amount)}
+              selectedCurrency={from} 
             />
          
             <InputBox
@@ -713,7 +713,7 @@ export default FormValidation;
                 amount={convertedAmount}
                 currencyOptions={options}
                 onCurrencyChange={(currency) => setTo(currency)}
-                selectCurrency={to}
+                selectedCurrency={to}
                 amountDisable
             />
                       
@@ -723,49 +723,53 @@ export default FormValidation;
       </form>
   );
   }
+  
   export default App
   ```
   #### InputBox.jsx
   ```js
   import React, {useId} from 'react'
 
-    export function InputBox({
-        label,
-        amount,
-        onAmountChange,
-        onCurrencyChange,
-        currencyOptions = [],
-        selectCurrency = "usd",
-        amountDisable = false,
-        currencyDisable = false,
-      }) {
-       const amountInputId = useId()
-    
-        return (
-            <div>
-                <div>
-                    <label htmlFor={amountInputId}>
-                        {label}
-                    </label>
-                    <input
-                        id={amountInputId}
-                        type="number"
-                        placeholder="Amount"
-                        disabled={amountDisable}
-                        value={amount}
-                        onChange={(e) => onAmountChange && onAmountChange(parseInt(e.target.value))}
-                    />
-                </div>
-               
-                    <p>Currency Type</p>
-                    <select value={selectCurrency} onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)} disabled={currencyDisable}>
-                          {currencyOptions.map((currency) => (
-                              <option key={currency} >{currency}</option>)
-                          )}
-                    </select>
-                
-            </div>
-        );
+  export function InputBox({
+      label,
+      amount,
+      setAmount,
+      onCurrencyChange,
+      currencyOptions = [],
+      selectedCurrency = "usd",
+      amountDisable = false,
+      currencyDisable = false,
+  }) {
+     const amountInputId = useId()
+     const style = {
+      border : "2px solid #055267aa",
+      marginTop : "10px",
+      borderRadius : "10px",
+      padding : "20px"
     }
-
+      return (
+          <div style={style}>
+              <div>
+                  <label htmlFor={amountInputId}>
+                      {label}
+                  </label>
+                  <input
+                      id={amountInputId}
+                      type="number"
+                      placeholder="Amount"
+                      disabled={amountDisable}
+                      value={amount}
+                      onChange={(e) => setAmount && setAmount(parseInt(e.target.value))}
+                  />
+              </div>
+             
+                  <p>Currency Type</p>
+                  <select value={selectedCurrency} onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)} disabled={currencyDisable}>
+                        {currencyOptions.map((currency) => (
+                            <option key={currency} >{currency}</option>)
+                        )}
+                  </select>
+          </div>
+      );
+  }
   ```
