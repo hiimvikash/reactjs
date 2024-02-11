@@ -781,3 +781,9 @@ export default FormValidation;
 
   <hr/>
   <h1 align = "center">React-Router</h1>
+
+- React Router is a library for React.js that helps you manage navigation and routing in your web applications. Think of it like a map that helps your users navigate through different pages or views within your React application.
+
+- In simpler terms, imagine your React application is like a house with many rooms (components). React Router acts like <b>signs and pathways within the house, guiding users from one room to another based on the URL they visit or the actions they take.</b> It allows you to define different routes, such as "/home", "/about", or "/contact", <b>and specify which React components should render when users visit those routes.</b>
+
+- With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
