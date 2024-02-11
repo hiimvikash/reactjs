@@ -779,7 +779,5 @@ export default FormValidation;
   }
   ```
 
-  <br>
-  <br>
-
-  # React-Router
+  <hr/>
+  <h1 align = "center">React-Router</h1>
