@@ -656,6 +656,9 @@ export default FormValidation;
   export default App
   ```
 # 12. Currency Convertor Project
+![image](https://github.com/hiimvikash/react/assets/71629248/c2b8c8c5-f4c7-4b9f-8fdf-a9145758f16b)
+![image](https://github.com/hiimvikash/react/assets/71629248/dbaa7279-72c4-4c52-b14d-1337f132b920)
+
 - ```useCurrencyInfo.js``` is a <b>hook</b>(assume it as function) which take input as the Fromcurrency and gives the conversion-rate for other currency [click here for API](https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json).
 - ```InputBox.jsx``` is a component which contains ```label```, ```input```, & ```selection```.
   #### useCurrencyInfo.js
@@ -683,10 +686,10 @@ export default FormValidation;
   
   function App() {
   
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState()
     const [from, setFrom] = useState("usd")
     const [to, setTo] = useState("inr")
-    const [convertedAmount, setConvertedAmount] = useState(0)
+    const [convertedAmount, setConvertedAmount] = useState()
   
     const currencyInfo = useCurrencyInfo(from);
   
@@ -715,6 +718,7 @@ export default FormValidation;
                 onCurrencyChange={(currency) => setTo(currency)}
                 selectedCurrency={to}
                 amountDisable
+                placeholder = "Converted Amount"
             />
                       
             <button type="submit">
@@ -739,6 +743,7 @@ export default FormValidation;
       selectedCurrency = "usd",
       amountDisable = false,
       currencyDisable = false,
+      placeholder = "Enter Amount"
   }) {
      const amountInputId = useId()
      const style = {
@@ -756,7 +761,7 @@ export default FormValidation;
                   <input
                       id={amountInputId}
                       type="number"
-                      placeholder="Amount"
+                      placeholder={placeholder}
                       disabled={amountDisable}
                       value={amount}
                       onChange={(e) => setAmount && setAmount(parseInt(e.target.value))}
