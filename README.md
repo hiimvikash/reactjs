@@ -853,7 +853,72 @@ export default FormValidation;
   - In ```<Profile/>``` page-component, we are importing ```useParams``` and then extracting the ```[anything]``` of URL. 
   - ```useParams()``` gives the object containing ```{profileID:1}``` so we extracted that and used further.
   - ```<Profiles/>``` is just containing similar ```<NavLink to='/profiles/1'> profile 1 </NavLink>```
+  ### Problem : NavLinks are in ```/profiles``` only so when we reach to ```/profiles/4``` then we again need to travel back to ```/profiles``` to get NavLinks.
+  ### Solution :- 
+  - Here you're telling that whenever URL is hit @ ```/profiles/[anything]``` then ```<Profile/>``` will be render in ```<Profiles/>```
+    ```js
+    const router = createBrowserRouter([
+      {
+        path : '/',
+        element : <Home />,
+        errorElement : <NotFound/>
+        
+      },
+      {
+        path : '/about',
+        element : <About/>,
+        
+      }, 
+      {
+        path : '/contact',
+        element : <ContactUS/>
+      },
+      {
+        path : '/profiles',
+        element : <Profiles/>, 
+        children :[
+          {
+            path : '/profiles/:profileID',
+            element : <Profile/>
+          }
+        ]
+      }
+    ])
+    ```
+- Now when you click on the NavLink you will notice URL only changes and page remains constant,  but ```<Profile/>``` is not rendered.
+- this is because you need to specify the placeholder in ```<Profiles/>``` where you want to render your ```<Profile/>``` page.
+- this can be achived using <Outlet>
+##### Profiles.jsx
+```js
+import { NavLink, Outlet } from "react-router-dom";
+export function Profiles(){
+    const Navstyle = {
+        display : "flex",
+        flexDirection : "column",
+        gap : "10px",
+        fontSize : "25px",
+    }
 
+    const mainStyle = {
+        display : "flex", 
+        gap : "10%"
+    }
+
+    return(
+        <div style = {mainStyle}>
+            <div style={Navstyle}>
+                <NavLink to='/profiles/1'>profile 1</NavLink>   
+                <NavLink to='/profiles/2'>profile 2</NavLink>   
+                <NavLink to='/profiles/3'>profile 3</NavLink>   
+                <NavLink to='/profiles/4'>profile 4</NavLink>   
+                <NavLink to='/profiles/5'>profile 5</NavLink> 
+            </div>
+
+            <Outlet/>
+        </div>
+    )
+}
+```
 
 
       
