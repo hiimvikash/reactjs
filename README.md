@@ -781,7 +781,6 @@ export default FormValidation;
   <hr/>
   
 # 13. React-Router
-
   - React Router is a library for React.js that helps you manage navigation and routing in your web applications.
   
   - In simpler terms, imagine your React application is like a house with many rooms (components). React Router acts like <b>signs and pathways within the house, guiding users from one room to another based on the URL they visit or the actions they take.</b> It allows you to define different routes, such as "/home", "/about", or "/contact", <b>and specify which React components should render when users visit those routes.</b>
@@ -790,10 +789,10 @@ export default FormValidation;
     
   ## Now after following the below steps you will be able to ```navigate to different URL and render your particular page-component without refreshing the page``` + You will be able to ```handle invalid path``` 😄.
   #### Step 1 : install react-router-dom in your Project
-    ```npm i react-router-dom```
+  ```npm i react-router-dom```
   #### Step 2 : create the page-components and import them at the top of main.jsx
-    ![image](https://github.com/hiimvikash/react/assets/71629248/97793ce9-7aaa-434a-a970-ff85f504879a)
-  -  ```<NavLink>``` is same as ```a``` tag, only difference are it <b>dont refresh the page</b> while navigating to other path and it allows us to apply <b>style on active links.</b>
+  ![image](https://github.com/hiimvikash/react/assets/71629248/97793ce9-7aaa-434a-a970-ff85f504879a)
+  - ```<NavLink>``` is same as ```a``` tag, only difference are it <b>dont refresh the page</b> while navigating to other path and it allows us to apply <b>style on active links.</b>
     ```js
     <NavLink to='/profiles/1' style={
         ({isActive}) => {
@@ -805,44 +804,43 @@ export default FormValidation;
     }>profile 1</NavLink> 
     ```
   #### Step 3 : changes in ```Main.jsx```
-    - imports from react-router-dom
-      ```js
-      import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-      ```
-    - calling <b>createBrowserRouter</b> function and storing the reference in some variable.
+  - imports from react-router-dom
+    ```js
+    import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+    ```
+  - calling <b>createBrowserRouter</b> function and storing the reference in some variable.
         - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
         - Argument passed is <b>a array of objects-routes</b>
-        - a object-route contains keys like ```path```, ```element``` (page to render when particular path is hit), ```errorElement```(to render error page when invalid     path is hit)
-      ```js
-        const router = createBrowserRouter([
-          {
-            path : '/',
-            element : <Home />,
-            errorElement : <NotFound/>
-          },
-          {
-            path : '/about',
-            element : <About/>,
-            
-          }, 
-          {
-            path : '/contact',
-            element : <ContactUS/>
-          }
-        ])
-      ```
-    - Now render the ```RouterProvider``` component and pass the ```router```(containing <b>When to render</b> and <b>What to render</b>) inside <b>router props</b>
+        - a object-route contains keys like ```path```, ```element``` (page to render when particular path is hit), ```errorElement```(to render error page when   invalid path is hit)
+  ```js
+      const router = createBrowserRouter([
+        {
+          path : '/',
+          element : <Home />,
+          errorElement : <NotFound/>
+        },
+        {
+          path : '/about',
+          element : <About/>,
+        }, 
+        {
+          path : '/contact',
+          element : <ContactUS/>
+        }
+      ])
+  ```
+  - Now render the ```RouterProvider``` component and pass the ```router```(containing <b>When to render</b> and <b>What to render</b>) inside <b>router props</b>
       ```js
         ReactDOM.createRoot(document.getElementById('root')).render(
           <React.StrictMode>
             <RouterProvider router = {router} />
           </React.StrictMode>,
         )
-      ```
-  
+      ```  
+    
 
   ## Here we will learn ```dynamic paths```
-  ![image](https://github.com/hiimvikash/react/assets/71629248/5357b304-6968-42d5-a959-3b51b5ac75d6)
+  ![image](https://github.com/hiimvikash/react/assets/71629248/e0855460-33e7-4f43-a428-9f5016c8ecc1)
   - In above URL ```leetcode.com/problemset``` is coded.
   - when you select a Q from the given list of thousands Qs, the URL changes to something like : ```leetcode.com/problemset/two-sum``` or ```leetcode.com/problemset/palindrome-number```.
   - and the page which renders is of same layout(Left-Side is Q describtion, Right-Side is code editor, Bottom is console...)
