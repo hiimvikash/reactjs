@@ -780,7 +780,7 @@ export default FormValidation;
   ```
   <hr/>
   
-  # 13. React-Router
+  # 13. React-Router (Link to V6 blog)[https://blog.webdevsimplified.com/2022-07/react-router/]
 
 - React Router is a library for React.js that helps you manage navigation and routing in your web applications.
 
