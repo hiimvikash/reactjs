@@ -792,12 +792,21 @@ export default FormValidation;
     ```npm i react-router-dom```
   #### Step 2 : create the page-components and import them at the top of main.jsx
     ![image](https://github.com/hiimvikash/react/assets/71629248/97793ce9-7aaa-434a-a970-ff85f504879a)
-  -  ```<NavLink>``` is same as ```a``` tag, only difference is it does'nt refresh the page while navigating to other path.
-  - 
+  -  ```<NavLink>``` is same as ```a``` tag, only difference are it dont refresh the page while navigating to other path and it allows us to give style on active links.
+    ```js
+    <NavLink to='/profiles/1' style={
+        ({isActive}) => {
+            return {
+                color: isActive?"red":"",
+                backgroundColor:"yellow"
+            }
+        }
+    }>profile 1</NavLink> 
+    ```
   #### Step 3 : changes in ```Main.jsx```
     - imports from react-router-dom
       ```js
-        import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+      import {createBrowserRouter, RouterProvider} from 'react-router-dom'
       ```
     - calling <b>createBrowserRouter</b> function and storing the reference in some variable.
         - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
