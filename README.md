@@ -782,8 +782,52 @@ export default FormValidation;
   
   # 13. React-Router (Link to V6 blog)[https://blog.webdevsimplified.com/2022-07/react-router/]
 
-- React Router is a library for React.js that helps you manage navigation and routing in your web applications.
+  - React Router is a library for React.js that helps you manage navigation and routing in your web applications.
+  
+  - In simpler terms, imagine your React application is like a house with many rooms (components). React Router acts like <b>signs and pathways within the house, guiding users from one room to another based on the URL they visit or the actions they take.</b> It allows you to define different routes, such as "/home", "/about", or "/contact", <b>and specify which React components should render when users visit those routes.</b>
+  
+  - With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
 
-- In simpler terms, imagine your React application is like a house with many rooms (components). React Router acts like <b>signs and pathways within the house, guiding users from one room to another based on the URL they visit or the actions they take.</b> It allows you to define different routes, such as "/home", "/about", or "/contact", <b>and specify which React components should render when users visit those routes.</b>
+  #### Step 1 : install react-router-dom in your Project
+    ```npm i react-router-dom```
+  #### Step 2 : create the page-components and import them at the top of main.jsx
+    ![image](https://github.com/hiimvikash/react/assets/71629248/97793ce9-7aaa-434a-a970-ff85f504879a)
+  -  ```<NavLink>``` is same as ```a``` tag, only difference is it does'nt refresh the page while navigating to other path.
+  - 
+  #### Step 3 : changes in ```Main.jsx```
+    - imports from react-router-dom
+      ```js
+        import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+      ```
+    - calling <b>createBrowserRouter</b> function and storing the reference in some variable.
+        - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
+        - Argument passed is <b>a array of objects-routes</b>
+        - a object-route contains keys like ```path```, ```element``` (page to render when particular path is hit), ```errorElement```(to render error page when invalid     path is hit)
+      ```js
+        const router = createBrowserRouter([
+          {
+            path : '/',
+            element : <Home />,
+            errorElement : <NotFound/>
+          },
+          {
+            path : '/about',
+            element : <About/>,
+            
+          }, 
+          {
+            path : '/contact',
+            element : <ContactUS/>
+          }
+        ])
+      ```
+    - Now render the ```RouterProvider``` component and pass the ```router```(containing <b>When to render</b> and <b>What to render</b>) inside <b>router props</b>
+      ```js
+        ReactDOM.createRoot(document.getElementById('root')).render(
+          <React.StrictMode>
+            <RouterProvider router = {router} />
+          </React.StrictMode>,
+        )
+      ```
 
-- With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
+      
