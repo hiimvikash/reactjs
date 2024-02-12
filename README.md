@@ -887,7 +887,7 @@ export default FormValidation;
     ```
 - Now when you click on the NavLink you will notice URL only changes and page remains constant,  but ```<Profile/>``` is not rendered.
 - this is because you need to specify the placeholder in ```<Profiles/>``` where you want to render your ```<Profile/>``` page.
-- this can be achived using <Outlet>
+- this can be achived using ```<Outlet/>```.
 ##### Profiles.jsx
 ```js
 import { NavLink, Outlet } from "react-router-dom";
