@@ -809,9 +809,9 @@ export default FormValidation;
     import {createBrowserRouter, RouterProvider} from 'react-router-dom'
     ```
   - calling <b>createBrowserRouter</b> function and storing the reference in some variable.
-        - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
-        - Argument passed is <b>a array of objects-routes</b>
-        - a object-route contains keys like ```path```, ```element``` (page to render when particular path is hit), ```errorElement```(to render error page when   invalid path is hit)
+    - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
+    - Argument passed is <b>a array of objects-routes</b>
+    - a object-route contains keys like ```path```, ```element``` (page to render when particular path is hit), ```errorElement```(to render error page when   invalid path is hit)
   ```js
       const router = createBrowserRouter([
         {
