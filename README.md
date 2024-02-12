@@ -780,19 +780,20 @@ export default FormValidation;
   ```
   <hr/>
   
-  # 13. React-Router (Link to V6 blog)[https://blog.webdevsimplified.com/2022-07/react-router/]
+# 13. React-Router
 
   - React Router is a library for React.js that helps you manage navigation and routing in your web applications.
   
   - In simpler terms, imagine your React application is like a house with many rooms (components). React Router acts like <b>signs and pathways within the house, guiding users from one room to another based on the URL they visit or the actions they take.</b> It allows you to define different routes, such as "/home", "/about", or "/contact", <b>and specify which React components should render when users visit those routes.</b>
   
   - With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
-
+    
+  ## Now after following the below steps you will be able to ```navigate to different URL and render your particular page-component without refreshing the page``` + You will be able to ```handle invalid path``` 😄.
   #### Step 1 : install react-router-dom in your Project
     ```npm i react-router-dom```
   #### Step 2 : create the page-components and import them at the top of main.jsx
     ![image](https://github.com/hiimvikash/react/assets/71629248/97793ce9-7aaa-434a-a970-ff85f504879a)
-  -  ```<NavLink>``` is same as ```a``` tag, only difference are it dont refresh the page while navigating to other path and it allows us to give style on active links.
+  -  ```<NavLink>``` is same as ```a``` tag, only difference are it <b>dont refresh the page</b> while navigating to other path and it allows us to apply <b>style on active links.</b>
     ```js
     <NavLink to='/profiles/1' style={
         ({isActive}) => {
@@ -838,5 +839,23 @@ export default FormValidation;
           </React.StrictMode>,
         )
       ```
+  
+
+  ## Here we will learn ```dynamic paths```
+  ![image](https://github.com/hiimvikash/react/assets/71629248/5357b304-6968-42d5-a959-3b51b5ac75d6)
+  - In above URL ```leetcode.com/problemset``` is coded.
+  - when you select a Q from the given list of thousands Qs, the URL changes to something like : ```leetcode.com/problemset/two-sum``` or ```leetcode.com/problemset/palindrome-number```.
+  - and the page which renders is of same layout(Left-Side is Q describtion, Right-Side is code editor, Bottom is console...)
+  ### So what do you think 🤔 did they coded manually the paths for thousands of Qs ?
+  ofc no. so Here comes the <b>dynamic paths.</b>
+  #### Step 4 : setup like this :
+  ![image](https://github.com/hiimvikash/react/assets/71629248/ad493f6f-4446-48d7-a07e-1a704e0a1c7a)
+
+  - Here highlighted thing in createBrowserRouter is called ```params``` which says : <b>Whenever user hit to ```/profiles/[anything]``` then ```<Profile/>``` will be rendered.</b>
+  - In ```<Profile/>``` page-component, we are importing ```useParams``` and then extracting the ```[anything]``` of URL. 
+  - ```useParams()``` gives the object containing ```{profileID:1}``` so we extracted that and used further.
+  - ```<Profiles/>``` is just containing similar ```<NavLink to='/profiles/1'> profile 1 </NavLink>```
+
+
 
       
