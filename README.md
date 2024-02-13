@@ -789,6 +789,7 @@ export default FormValidation;
   - With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
     
   ## Now after following the below steps you will be able to ```navigate to different URL and render your particular page-component without refreshing the page``` + You will be able to ```handle invalid path``` 😄.
+  ## Note : Rendering of page without refreshing is only possible when you use NavLinks to navigate to other URL. If you're changing URL for navigation then it will cause refresh obviously.
   #### Step 1 : install react-router-dom in your Project
   ```npm i react-router-dom```
   #### Step 2 : create the page-components and import them at the top of main.jsx
@@ -970,6 +971,144 @@ export function Profiles(){
       }
     ])
     ```
+  ## Final Way : (Final way to implement)
+  #### Main.jsx
+  ```js
+    import {Route, createBrowserRouter, RouterProvider, createRoutesFromElements} from 'react-router-dom'
+
+    const router = createBrowserRouter(
+    createRoutesFromElements(
+      
+        <Route path='/' element={<Layout />}>
+  
+          <Route path='/home' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<ContactUS />} />
+          <Route path='profiles' element={<Profiles />} >
+            <Route path=':profileID' element={<Profile/>} />
+          </Route>
+          <Route loader={githubInfoLoader}path='github' element={<GitHub />}/>
+  
+        </Route>
+  
+      )
+    )
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <React.StrictMode>
+        <RouterProvider router = {router} />
+      </React.StrictMode>
+    )
+  ```
+#### Layout.jsx
+```js
+import React from 'react'
+import { Outlet, NavLink } from 'react-router-dom'
+
+function Layout() {
+  
+    const Navstyle = {
+        display : "flex",
+        flexDirection : "column",
+        gap : "10px",
+        fontSize : "25px",
+    }
+
+    const mainStyle = {
+        display : "flex", 
+        gap : "10%"
+    }
+
+    return(
+        <div style = {mainStyle}>
+            <div style={Navstyle}>
+                <NavLink to='/home'>Home</NavLink>   
+                <NavLink to='/about'>About</NavLink>   
+                <NavLink to='/contact'>Contact us</NavLink>   
+                <NavLink to='/profiles'>profiles Link</NavLink>   
+                <NavLink to='/github'>Github</NavLink> 
+            </div>
+
+            <Outlet/>
+        </div>
+    )
+}
+
+export default Layout
+```
+#### Profiles.jsx
+```js
+import { NavLink, Outlet } from "react-router-dom";
+export function Profiles(){
+    const Navstyle = {
+        display : "flex",
+        flexDirection : "column",
+        gap : "10px",
+        fontSize : "25px",
+    }
+
+    const mainStyle = {
+        display : "flex", 
+        gap : "200px"
+    }
+
+    return(
+        <div style = {mainStyle}>
+            <div style={Navstyle}>
+                <NavLink to='/profiles/1'>profile 1</NavLink>   
+                <NavLink to='/profiles/2'>profile 2</NavLink>   
+                <NavLink to='/profiles/3'>profile 3</NavLink>   
+                <NavLink to='/profiles/4'>profile 4</NavLink>   
+                <NavLink to='/profiles/5'>profile 5</NavLink> 
+            </div>
+
+            <Outlet/>
+        </div>
+    )
+}
+```
+#### Profile.jsx
+```js
+import { useParams } from "react-router-dom"
+
+export function Profile(){
+    const id = useParams().profileID;
+    
+    return (
+        <>
+        <h1>I m in profile {id}</h1>
+        </>
+
+    )
+}
+```
+#### Github.jsx
+```js
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+
+function GitHub (){
+    // const {user} = useParams();
+    
+    // const [data, setData] = useState({});
+    // useEffect(()=>{
+    //     fetch(`https://api.github.com/users/${user}`)
+    //     .then(res => res.json())
+    //     .then(data => setData(data))
+    // }, [])
+
+    const data = useLoaderData();
+    return <h1> Github followers : {data.followers}</h1>
+}
+export default GitHub;
+
+const githubInfoLoader = async function(){
+    const res = await fetch(`https://api.github.com/users/hiimvikash`);
+    return res.json();
+}
+export {githubInfoLoader};
+```
+  
 
 
       
