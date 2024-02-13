@@ -923,8 +923,8 @@ export function Profiles(){
 ```
 ## SOME OTHER WAYS TO visualise createBrowserRouter.
   ### Way 1 : 
-  - Here ```<Layout/>``` is like parentPage containing that component which will be render in every page like Home, About, Contact.
-  - So component which may remain constant throughout the websites are : navbar and footer.
+  - component which may remain constant throughout the websites are : navbar and footer.
+  - Here ```<Layout/>``` is like parentPage containing that component which remain constant and will render in everypage like Home, About, Contact.
     ##### Layout.jsx
     ```js
       import React from 'react'
