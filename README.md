@@ -920,6 +920,56 @@ export function Profiles(){
     )
 }
 ```
+## SOME OTHER WAYS TO visualise createBrowserRouter.
+  ### Way 1 : 
+  - Here ```<Layout/>``` is like parentPage containing that component which will be render in every page like Home, About, Contact.
+  - So component which may remain constant throughout the websites are : navbar and footer.
+    ##### Layout.jsx
+    ```js
+      import React from 'react'
+      import Header from './components/Header/Header'
+      import Footer from './components/Footer/Footer'
+      import { Outlet } from 'react-router-dom'
+      
+      function Layout() {
+        return (
+          <>
+          <Header/>
+          <Outlet />
+          <Footer />
+          </>
+        )
+      }
+      
+      export default Layout
+    ```
+    ##### Main.jsx
+    ```js
+      const router = createBrowserRouter([
+      {
+        path: '/',
+        element: <Layout/>,
+        children: [
+          {
+            path: "",
+            element: <Home />
+          },
+          {
+            path: "about",
+            element: <About />
+          },
+          {
+            path: "contact",
+            element: <Contact />
+          },
+          {
+            path: "user/:userID",
+            element : <User/>
+          }
+        ]
+      }
+    ])
+    ```
 
 
       
