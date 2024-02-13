@@ -1,0 +1,25 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  transition: all 0.5s;
+}
+.footer{
+  width : 50%;
+  background-color: rgb(226, 233, 233);
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  border-radius: 10px;
+}
