@@ -5,7 +5,7 @@ export default function Header(){
     return(
         <>
         <h1>Demonstration of Context API</h1>
-        <button onClick={toggleTheme} style={{backgroundColor : (theme==='dark' ? "#607175" : "#f1fcff"), color : (theme==='dark' ? "#f1fcff" : "#607175") }}>Toggle Theme</button>
+        <button onClick={toggleTheme} style={{backgroundColor : (theme==='dark' ? "#0e414d" : "#f1fcff"), color : (theme==='dark' ? "#f1fcff" : "#0e414d") }}>Toggle Theme</button>
         </>
     )
 }
