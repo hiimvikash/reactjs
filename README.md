@@ -981,6 +981,7 @@ export function Profiles(){
       
         <Route path='/' element={<Layout />}>
   
+          <Route path='*' element={<NotFound />} />
           <Route path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<ContactUS />} />
