@@ -1109,7 +1109,117 @@ const githubInfoLoader = async function(){
 }
 export {githubInfoLoader};
 ```
-  
 
+# 14. Context API
+The React Context API is a feature in React that **allows you to manage global state and share data between components** without having to pass props manually through every level of the component tree. Here's how it works :-
+1. **Provider:** The Context API provides a Provider component which wraps around the part of your component tree where you want to share data. It accepts a value prop which represents the data you want to share.
 
+1. **Consumer:** Components that need access to the shared data can subscribe to the context using the Consumer component or by using the useContext hook (introduced in React 16.8). This allows them to access the data provided by the Provider higher up in the component tree.
+
+### Example 1 : 
+In this example, **ChildComponent** is able to access the value "Hello from Context" provided by the **MyContext.Provider** component without the need for prop drilling.
+  ```js
+  // Create a new context
+  const MyContext = React.createContext();
+
+  // Wrap your application with the Provider
+  function App() {
+    return (
+      <MyContext.Provider value="Hello from Context">
+        <ChildComponent />
+      </MyContext.Provider>
+    );
+  }
+
+  // ChildComponent consuming the context
+  function ChildComponent() {
+    // Using useContext hook to access context
+    const valueFromContext = useContext(MyContext);
+    return <div>{valueFromContext}</div>;
+  }
+  ```
+### Example 2 :
+Here's a more elaborate example of using the React Context API to manage a theme in a React application:
+  #### ThemeContext.jsx
+  ```js
+  import React, { createContext, useState, useContext } from "react";
+
+// 1. create a new context
+  const ThemeContext = createContext();
+
+  // 2. Set-up your Provider component
+  export function ThemeProvider({children}){
+      const [theme, setTheme] = useState('light');
+
+      function toggleTheme(){
+          setTheme((prevTheme)=> (prevTheme==='light'? 'dark' : 'light'))
+      }
+
+      return(
+          <ThemeContext.Provider value = {{theme, toggleTheme}}>
+              {children}
+          </ThemeContext.Provider>
+      )
+  }
+
+  // 3. custom hook to Consume ThemeContext
+  export function useTheme() {
+      return useContext(ThemeContext);
+  }
+```
+In this example:
+  - We create a new context called ThemeContext using createContext.
+  - We create a ThemeProvider component that wraps the entire application and provides the theme state and a function to toggle the theme.
+  - The toggleTheme function changes the theme between 'light' and 'dark' modes.
+  - We define a custom hook useTheme to access the theme context.
+
+Now, let's use this context in our components:
+  #### Header.jsx
+  ```js
+  import { useTheme } from "./contexts/ThemeContext";
+
+  export default function Header(){
+      const {theme, toggleTheme}= useTheme();
+      return(
+          <>
+          <h1>Demonstration of Context API</h1>
+          <button onClick={toggleTheme}>Toggle Theme</button>
+          </>
+      )
+  }
+  ```
+  #### Content.jsx
+  ```js
+  import { useTheme } from "./contexts/ThemeContext";
+
+  export default function Content(){
+      const{theme} = useTheme();
+
+      return (
+          <>
+          <p style={{backgroundColor : (theme === 'dark' ? "#0e414d" : "#f1fcff"), color : (theme === 'dark' ? "#f1fcff" : "#0e414d"), transition : "all 0.3s ease-out", padding:"1.5em", borderRadius:"0.5em" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur accusantium error, explicabo aut minima corrupti. Blanditiis dolor sit placeat iste nesciunt. Fugiat autem, corrupti culpa dolorem, accusamus reprehenderit id inventore aliquid qui officia commodi quis. Error laudantium ut aliquid debitis. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa nostrum perferendis odio iure. Eligendi natus aspernatur eaque nam suscipit nulla enim sunt, commodi voluptates, rem eius, fuga velit ratione quaerat?
+          </p>
+          </>
+      )
+  }
+  ```
+  #### App.jsx
+  ```js
+  import { ThemeProvider } from './contexts/ThemeContext'
+  import Header from './Header'
+  import Content from './Content'
+  import './App.css'
+
+  function App() {
+
+    return (
+      <ThemeProvider>
+        <Header/>
+        <Content/>
+      </ThemeProvider>
+    )
+  }
+
+  export default App
+  ```
       
