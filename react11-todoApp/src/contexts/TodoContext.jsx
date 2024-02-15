@@ -2,18 +2,12 @@ import { useState, useEffect, createContext, useContext } from "react";
 
 
 // 1. create Todocontext
-const TodoContext = createContext({
-    todos : [],
-    addTodo : ()=>{},
-    updateTodo : ()=>{},
-    deleteTodo : ()=>{},
-    toggleComplete : ()=>{}
-});
+const TodoContext = createContext();
 
 // 2. Make a Provider Component
 export function TodoProvider({children}){
     let [todos, setTodos] = useState([]);
-
+    
     useEffect(()=>{
         const tody = JSON.parse(localStorage.getItem("todos"));
         if(tody && tody.length > 0) setTodos(tody);
@@ -22,7 +16,6 @@ export function TodoProvider({children}){
     useEffect(()=>{
         localStorage.setItem("todos", JSON.stringify(todos))
     }, [todos])
-    
     const addTodo = (todo) =>{
         setTodos((prevTodos) => [{id : Date.now(), ...todo}, ...prevTodos])
     }
@@ -50,7 +43,7 @@ export function TodoProvider({children}){
 
 }
 
-// export const TodoProvider = TodoContext.Provider
+
 
 // 3. useContext
 export function useTodo() {return useContext(TodoContext);}

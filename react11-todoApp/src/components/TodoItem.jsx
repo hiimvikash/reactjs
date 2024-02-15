@@ -18,17 +18,26 @@ function TodoItem({todo}) {
     }
 
     const styleList ={
-        listStyle: "none", padding: "0.5em", margin : "10px 0", 
+        listStyle: "none", margin : "10px 0", 
         fontSize : "1.2em", width : "30vw",
-        border: "1px solid black", display : "flex", 
-        alignItems : "center", justifyContent:"space-between"
+         display : "flex", 
+        alignItems : "center", justifyContent:"space-between",
+        
+    }
+    const styleInput = {
+        fontSize : "1.2em", padding: "0.5em",
+        height : "100%", marginLeft : "10px",
+        border : "none",
+        backgroundColor : todo.isComplete ? "#0000000f" : ""
     }
 
 
+
   return (
-    <div>
+    <div style={{}}>
+    <div style={styleList}>
         <input type="checkbox" onChange={toggleChecked} checked = {todo.isComplete}/>
-        <input type="text" value={todomsg} onChange = {(e)=>setTodomsg(e.target.value)} readOnly = {!isEdit} />
+        <input style={styleInput} type="text" value={todomsg} onChange = {(e)=>setTodomsg(e.target.value)} readOnly = {!isEdit} />
         <button onClick={()=>{
             if(isEdit){
                 editTodo();
@@ -36,6 +45,7 @@ function TodoItem({todo}) {
             else setIsEdit(true)
         }} disabled = {todo.isComplete} >{isEdit ? "📁" : "📝"}</button>
         <button onClick={()=>{deleteTodo(todo.id)}}>🗑️</button>
+    </div>
     </div>
   )
 }
