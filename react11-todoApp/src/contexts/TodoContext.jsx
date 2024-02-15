@@ -16,6 +16,7 @@ export function TodoProvider({children}){
     useEffect(()=>{
         localStorage.setItem("todos", JSON.stringify(todos))
     }, [todos])
+    
     const addTodo = (todo) =>{
         setTodos((prevTodos) => [{id : Date.now(), ...todo}, ...prevTodos])
     }

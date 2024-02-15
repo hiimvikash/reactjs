@@ -13,6 +13,10 @@ function TodoItem({todo}) {
     }
 
     function editTodo(){
+        if(todomsg === ""){
+            deleteTodo(todo.id);
+            return;
+        }
         updateTodo(todo.id, {...todo, value : todomsg});
         setIsEdit(false);
     }
