@@ -1567,6 +1567,7 @@ Assume the counter App for simplicity, where you will have two two buttons ```in
 
   export default Counter;
   ```
+![image](https://github.com/hiimvikash/react/assets/71629248/fb219000-1022-4f88-a127-9112dacbad9a)
 
 
 
