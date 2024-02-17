@@ -1525,7 +1525,7 @@ const initialState = {
     numOfCakes : 10
 }
 
-// create action : action is nothing but an object with type property
+// create action creator : action is nothing but an object with type property
 function orderCake(n=1){
     return {
         type : 'CAKE_ORDERED',
