@@ -1481,6 +1481,88 @@ Redux uses actions and reducers to manage state changes. Actions are plain JavaS
 Redux promotes immutable updates to the state. Instead of directly modifying the existing state, reducers create a new copy of the state with the desired changes applied. This ensures that the state remains predictable and does not get mutated unintentionally.
 
 ## Redux Architecture
+
+### Way 1 : 
+
+#### Three Principles
+- **First Principle :** "The global state of your application is stored as an object inside a single store"  
+
+  - Maintain our application state in a single object which would be managed by the Redux store
+  - Cake Shop - Let's assume we are tracking the number of cakes on the shelf.
+  ```
+  {
+  numberOfCakes: 10
+  }
+  ```
+
+- **Second Principle :** "The only way to change the state is to dispatch an action, an object that describes what happened"
+  - To update the state of your app, you need to let Redux know about that with an action
+  - Not allowed to directly update the state object
+  - In Cake Shop you Scan the QR code and place an order - CAKE_ORDERED, you don't cross the shelf and take the cake by yourself right ?
+  ```
+  {
+  type: 'CAKE_ORDERED'
+  }
+  ```
+
+- **Third Principle :** "To specify how the state tree is updated based on actions, you write pure reducers"
+  - Reducer is (previousState, action) => newState
+  - In Cake Shop Reducer is the shopkeeper
+
+![alt text](image.png)
+- A store that holds the state of your application.
+- An action that describes what happened in the application.
+- A reducer which handles the action and decides how to update the state.
+- A dispatcher which sends your action to reducer
+
+![image](https://github.com/hiimvikash/react/assets/71629248/fb219000-1022-4f88-a127-9112dacbad9a)
+```js
+const redux = require('redux')
+
+// create initial state of your store(shop)
+const initialState = {
+    numOfCakes : 10
+}
+
+// create action : action is nothing but an object with type property
+function orderCake(n=1){
+    return {
+        type : 'CAKE_ORDERED',
+        quantity : n
+    }
+}
+
+// create reducer : is like a shopkeeper
+const reducer = (state = initialState, action)=>{
+    switch(action.type){
+        case 'CAKE_ORDERED' : return {
+            ...state, 
+            numOfCakes : state.numOfCakes - action.quantity
+        }
+        default : return state
+    }
+}
+
+// create store
+const store = redux.createStore(reducer);
+
+console.log("Initial State", store.getState());
+
+// this function runs whenever state is updated basically you're subscribed and you will get an update
+// and returns a function which is when called then you unsubscribe.
+const unsubscribe = store.subscribe(()=>{
+    console.log("Updated State", store.getState())
+})
+
+store.dispatch(orderCake(2));
+store.dispatch(orderCake());
+store.dispatch(orderCake(3));
+
+unsubscribe();
+
+store.dispatch(orderCake()); // this will not call the subscribe CB on state change
+console.log("unsub", store.getState()) 
+```
 ![image](https://github.com/hiimvikash/react/assets/71629248/08701749-5c08-43ce-8467-f936c538118b)
 
 #### Let me break down the above architecture 
@@ -1567,7 +1649,7 @@ Assume the counter App for simplicity, where you will have two two buttons ```in
 
   export default Counter;
   ```
-![image](https://github.com/hiimvikash/react/assets/71629248/fb219000-1022-4f88-a127-9112dacbad9a)
+
 
 
 
