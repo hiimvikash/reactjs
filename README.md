@@ -1509,7 +1509,8 @@ Redux promotes immutable updates to the state. Instead of directly modifying the
   - Reducer is (previousState, action) => newState
   - In Cake Shop Reducer is the shopkeeper
 
-![alt text](image.png)
+![image](https://github.com/hiimvikash/react/assets/71629248/a60422a5-da35-416d-8ac6-bf0b5a3b2314)
+
 - A store that holds the state of your application.
 - An action that describes what happened in the application.
 - A reducer which handles the action and decides how to update the state.
@@ -1563,6 +1564,9 @@ unsubscribe();
 store.dispatch(orderCake()); // this will not call the subscribe CB on state change
 console.log("unsub", store.getState()) 
 ```
+![image](https://github.com/hiimvikash/react/assets/71629248/b275f0a9-9dc7-4405-96c3-e5624d23e125)
+
+### Way 2 :
 ![image](https://github.com/hiimvikash/react/assets/71629248/08701749-5c08-43ce-8467-f936c538118b)
 
 #### Let me break down the above architecture 
