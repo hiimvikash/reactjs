@@ -1458,6 +1458,11 @@ export default App;
 
 **A Predictable State Container for JS Apps.**
 
+
+
+![image](https://github.com/hiimvikash/react/assets/71629248/08701749-5c08-43ce-8467-f936c538118b)
+
+
 In redux, a pattern is enforced to ensure all state transitions are explicit and can be tracked.
 
 Here's a breakdown in easy language:
