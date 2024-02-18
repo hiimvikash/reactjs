@@ -1581,7 +1581,8 @@ unsubscribe();
 store.dispatch(orderCake()); // this will not call the subscribe CB on state change
 console.log("unsub", store.getState()) 
 ```
-![image](https://github.com/hiimvikash/react/assets/71629248/d3b27c79-3d63-4417-be81-05b98631193b)
+![image](https://github.com/hiimvikash/react/assets/71629248/5a166175-08fa-4e80-bf66-a40e3c6a5d8f)
+
 
 
 - 1 Shop -> 1 store
