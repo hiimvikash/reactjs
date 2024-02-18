@@ -1532,6 +1532,12 @@ function orderCake(n=1){
         quantity : n
     }
 }
+function restockCake(n=1){
+  return {
+        type : 'CAKE_RESTOCKED',
+        quantity : n
+    }
+}
 
 // create reducer : is like a shopkeeper
 const reducer = (state = initialState, action)=>{
@@ -1539,6 +1545,11 @@ const reducer = (state = initialState, action)=>{
         case 'CAKE_ORDERED' : return {
             ...state, 
             numOfCakes : state.numOfCakes - action.quantity
+        }
+
+        case 'CAKE_RESTOCKED' : return {
+          ...state, 
+          numOfCakes : state.numOfCakes + action.quantity
         }
         default : return state
     }
@@ -1558,6 +1569,7 @@ const unsubscribe = store.subscribe(()=>{
 store.dispatch(orderCake(2));
 store.dispatch(orderCake());
 store.dispatch(orderCake(3));
+store.dispatch(restockCake(3));
 
 unsubscribe();
 
