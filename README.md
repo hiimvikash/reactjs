@@ -1480,11 +1480,9 @@ Redux uses actions and reducers to manage state changes. Actions are plain JavaS
 - Immutable Updates:
 Redux promotes immutable updates to the state. Instead of directly modifying the existing state, reducers create a new copy of the state with the desired changes applied. This ensures that the state remains predictable and does not get mutated unintentionally.
 
-## Redux Architecture
+## Way 1 : Implementing Redux in node
 
-### Way 1 : 
-
-#### Three Principles
+### Three Principles
 - **First Principle :** "The global state of your application is stored as an object inside a single store"  
 
   - Maintain our application state in a single object which would be managed by the Redux store
@@ -1716,7 +1714,8 @@ Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 17 } }
 PS D:\react-git\react12-reduxRaw> 
 ```
 
-### Way 2 :
+## Way 2 : Implementing Redux in React
+### Redux Architecture
 ![image](https://github.com/hiimvikash/react/assets/71629248/08701749-5c08-43ce-8467-f936c538118b)
 
 #### Let me break down the above architecture 
