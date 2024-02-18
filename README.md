@@ -1517,6 +1517,11 @@ Redux promotes immutable updates to the state. Instead of directly modifying the
 - A dispatcher which sends your action to reducer
 
 ![image](https://github.com/hiimvikash/react/assets/71629248/fb219000-1022-4f88-a127-9112dacbad9a)
+- 1 Shop -> 1 store
+- 1 cake initial state
+- 1 cake shopkeeper -> 1 reducer() for cake
+- 2 typeof customer action -> 2 action creator
+#### ```index.js```
 ```js
 const redux = require('redux')
 
@@ -1577,6 +1582,107 @@ store.dispatch(orderCake()); // this will not call the subscribe CB on state cha
 console.log("unsub", store.getState()) 
 ```
 ![image](https://github.com/hiimvikash/react/assets/71629248/b275f0a9-9dc7-4405-96c3-e5624d23e125)
+
+- 1 Shop -> 1 store
+- 1 cake initial state & 1 icecream initial state
+- 2 shopkeeper(cake & icecream) & -> 2 reducer() for cake & icecream
+- 4 typeof customer action -> 4 action creator
+#### ```index.js```
+```js
+const redux = require('redux')
+
+// create initial state of your store(shop)
+const cakeinitialState = {
+    numOfCakes : 10
+}
+const icreaminitialState = {
+    numOfIcream : 10
+}
+
+// create action creator : action is nothing but an object with type property
+function orderCake(n=1){
+    return {
+        type : 'CAKE_ORDERED',
+        quantity : n
+    }
+}
+function restockCake(n=1){
+  return {
+        type : 'CAKE_RESTOCKED',
+        quantity : n
+    }
+}
+function ordericream(n=1){
+    return {
+        type : 'ICREAM_ORDERED',
+        quantity : n
+    }
+}
+function restockicream(n=1){
+  return {
+        type : 'ICREAM_RESTOCKED',
+        quantity : n
+    }
+}
+
+// create reducer : is like a cakeshopkeeper
+const cakereducer = (state = cakeinitialState, action)=>{
+    switch(action.type){
+        case 'CAKE_ORDERED' : return {
+            ...state, 
+            numOfCakes : state.numOfCakes - action.quantity
+        }
+
+        case 'CAKE_RESTOCKED' : return {
+          ...state, 
+          numOfCakes : state.numOfCakes + action.quantity
+        }
+        default : return state
+    }
+}
+// create reducer : is like a cakeshopkeeper
+const icreamreducer = (state = icreaminitialState, action)=>{
+    switch(action.type){
+        case 'ICREAM_ORDERED' : return {
+            ...state, 
+            numOfIcream : state.numOfIcream - action.quantity
+        }
+
+        case 'ICREAM_RESTOCKED' : return {
+          ...state, 
+          numOfIcream : state.numOfIcream + action.quantity
+        }
+        default : return state
+    }
+}
+
+// combine reducer coz we can pass 1 reducer in store
+const rootreducer = combineReducer({
+  cake : cakereducer,
+  icecream : icreamreducer
+})
+
+// create store
+const store = redux.createStore(rootreducer);
+
+console.log("Initial State", store.getState());
+
+// this function runs whenever state is updated basically you're subscribed and you will get an update
+// and returns a function which is when called then you unsubscribe.
+const unsubscribe = store.subscribe(()=>{
+    console.log("Updated State", store.getState())
+})
+
+store.dispatch(orderCake(2));
+store.dispatch(orderCake());
+store.dispatch(orderCake(3));
+store.dispatch(restockCake(3));
+
+unsubscribe();
+
+store.dispatch(orderCake()); // this will not call the subscribe CB on state change
+console.log("unsub", store.getState()) 
+```
 
 ### Way 2 :
 ![image](https://github.com/hiimvikash/react/assets/71629248/08701749-5c08-43ce-8467-f936c538118b)
