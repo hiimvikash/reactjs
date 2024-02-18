@@ -1583,6 +1583,15 @@ console.log("unsub", store.getState())
 ```
 ![image](https://github.com/hiimvikash/react/assets/71629248/5a166175-08fa-4e80-bf66-a40e3c6a5d8f)
 
+**Alternative way to dispatch by binding actionCreator**
+```js
+  const actions = redux.bindActionCreators({ orderCake, restockCake }, store.dispatch)
+  actions.orderCake()
+  actions.orderCake()
+  actions.orderCake()
+  actions.restockCake(3)
+```
+
 
 
 - 1 Shop -> 1 store
@@ -1598,7 +1607,7 @@ const cakeinitialState = {
     numOfCakes : 10
 }
 const icreaminitialState = {
-    numOfIcream : 10
+    numOfIcream : 20
 }
 
 // create action creator : action is nothing but an object with type property
@@ -1627,7 +1636,7 @@ function restockicream(n=1){
     }
 }
 
-// create reducer : is like a cakeshopkeeper
+// create reducer : is like a cake shopkeeper
 const cakereducer = (state = cakeinitialState, action)=>{
     switch(action.type){
         case 'CAKE_ORDERED' : return {
@@ -1642,7 +1651,7 @@ const cakereducer = (state = cakeinitialState, action)=>{
         default : return state
     }
 }
-// create reducer : is like a cakeshopkeeper
+// create reducer : is like a icecream shopkeeper
 const icreamreducer = (state = icreaminitialState, action)=>{
     switch(action.type){
         case 'ICREAM_ORDERED' : return {
@@ -1659,7 +1668,7 @@ const icreamreducer = (state = icreaminitialState, action)=>{
 }
 
 // combine reducer coz we can pass 1 reducer in store
-const rootreducer = combineReducer({
+const rootreducer = redux.combineReducers({
   cake : cakereducer,
   icecream : icreamreducer
 })
@@ -1672,18 +1681,27 @@ console.log("Initial State", store.getState());
 // this function runs whenever state is updated basically you're subscribed and you will get an update
 // and returns a function which is when called then you unsubscribe.
 const unsubscribe = store.subscribe(()=>{
+    // Updated State { cake: { numOfCakes: 7 }, icecream: { numOfIcream: 20 } }
     console.log("Updated State", store.getState())
+    // if you only want cake updates store.getState().cake
 })
 
-store.dispatch(orderCake(2));
-store.dispatch(orderCake());
-store.dispatch(orderCake(3));
-store.dispatch(restockCake(3));
+// store.dispatch(orderCake(2));
+// store.dispatch(orderCake());
+// store.dispatch(orderCake(3));
+// store.dispatch(restockCake(3));
+const actions = redux.bindActionCreators({ orderCake, restockCake, ordericream, restockicream}, store.dispatch)
+actions.orderCake()
+actions.orderCake()
+actions.orderCake()
+actions.restockCake(3)
+
+actions.restockicream()
+actions.ordericream()
+actions.ordericream()
+actions.ordericream(2)
 
 unsubscribe();
-
-store.dispatch(orderCake()); // this will not call the subscribe CB on state change
-console.log("unsub", store.getState()) 
 ```
 
 ### Way 2 :
