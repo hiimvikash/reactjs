@@ -1581,10 +1581,11 @@ unsubscribe();
 store.dispatch(orderCake()); // this will not call the subscribe CB on state change
 console.log("unsub", store.getState()) 
 ```
-![image](https://github.com/hiimvikash/react/assets/71629248/b275f0a9-9dc7-4405-96c3-e5624d23e125)
+![image](https://github.com/hiimvikash/react/assets/71629248/d3b27c79-3d63-4417-be81-05b98631193b)
+
 
 - 1 Shop -> 1 store
-- 1 cake initial state & 1 icecream initial state
+- 2 initial state (cake & icecream)
 - 2 shopkeeper(cake & icecream) & -> 2 reducer() for cake & icecream
 - 4 typeof customer action -> 4 action creator
 #### ```index.js```
