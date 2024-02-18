@@ -1,4 +1,6 @@
 const redux = require('redux')
+const reduxLogger = require('redux-logger')
+const applyMiddleware = redux.applyMiddleware
 
 // create initial state of your store(shop)
 const cakeinitialState = {
@@ -72,14 +74,15 @@ const rootreducer = redux.combineReducers({
 })
 
 // create store
-const store = redux.createStore(rootreducer);
+const logger = reduxLogger.createLogger();
+const store = redux.createStore(rootreducer, applyMiddleware(logger));
 
 console.log("Initial State", store.getState());
 
 // this function runs whenever state is updated basically you're subscribed and you will get an update
 // and returns a function which is when called then you unsubscribe.
 const unsubscribe = store.subscribe(()=>{
-    console.log("Updated State", store.getState())
+    // console.log("Updated State", store.getState().cake)
 })
 
 // store.dispatch(orderCake(2));
@@ -92,9 +95,9 @@ actions.orderCake()
 actions.orderCake()
 actions.restockCake(3)
 
+actions.restockicream()
 actions.ordericream()
 actions.ordericream()
 actions.ordericream(2)
-actions.restockicream()
 
 unsubscribe();

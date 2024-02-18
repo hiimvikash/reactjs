@@ -1681,9 +1681,7 @@ console.log("Initial State", store.getState());
 // this function runs whenever state is updated basically you're subscribed and you will get an update
 // and returns a function which is when called then you unsubscribe.
 const unsubscribe = store.subscribe(()=>{
-    // Updated State { cake: { numOfCakes: 7 }, icecream: { numOfIcream: 20 } }
     console.log("Updated State", store.getState())
-    // if you only want cake updates store.getState().cake
 })
 
 // store.dispatch(orderCake(2));
@@ -1696,12 +1694,26 @@ actions.orderCake()
 actions.orderCake()
 actions.restockCake(3)
 
-actions.restockicream()
 actions.ordericream()
 actions.ordericream()
 actions.ordericream(2)
+actions.restockicream()
 
 unsubscribe();
+```
+#### ```output```
+```js
+PS D:\react-git\react12-reduxRaw> node index1
+Initial State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 20 } }
+Updated State { cake: { numOfCakes: 9 }, icecream: { numOfIcream: 20 } }
+Updated State { cake: { numOfCakes: 8 }, icecream: { numOfIcream: 20 } }
+Updated State { cake: { numOfCakes: 7 }, icecream: { numOfIcream: 20 } }
+Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 20 } }
+Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 19 } }
+Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 18 } }
+Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 16 } }
+Updated State { cake: { numOfCakes: 10 }, icecream: { numOfIcream: 17 } }
+PS D:\react-git\react12-reduxRaw> 
 ```
 
 ### Way 2 :
