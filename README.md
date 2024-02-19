@@ -1863,7 +1863,8 @@ PS D:\react-git\react14-rtkRaw-MW>
   }
 ```
 - extraReducers allows createSlice to respond and update its own state in response to other action types besides the types it has generated.
-- Notice the logged output of step 3, there you will notice ```action.type = "cake/ordered", "icecream/ordered"```
+- Notice the logged output of step 3, there you will notice ```action.type = "cake/ordered", "icecream/ordered"``` : ```nameOfSlice/reducer()```
+- The extraReducers option should be a function that receives a parameter called builder. The builder object provides methods that let us define additional case reducers that will run in response to actions defined outside of the slice.
 - In ```rtk``` you modify your ```icecreamSlice.js``` like :-
 
 ```js
