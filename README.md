@@ -1869,4 +1869,4 @@ Some points to 🧹 your 🧠
 - Redux toolkit is a library for efficient redux development
 - React-redux is a library that provides bindings to use React and Redux (Toolkit) together in an application
 
-
+![alt text](redux-rtk.png)
