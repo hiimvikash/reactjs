@@ -1734,7 +1734,8 @@ Some points to 🧹 your 🧠
 - Redux toolkit is a library for efficient redux development
 - React-redux is a library that provides bindings to use React and Redux (Toolkit) together in an application
 
-#### ```index1.js``` --> ```redux-toolkit```
+### 1 : ```index1.js``` --> ```redux-toolkit```
+- Here we're rebuilding our cake shop from ```rtk```
 ![alt text](redux-rtk.png)
 #### ```output```
 
@@ -1756,7 +1757,8 @@ Updated State { numOfCakes: 7 }
 unsub { numOfCakes: 6 }
 ```
 
-#### [```index2.js``` --> ```redux-toolkit```](https://github.com/hiimvikash/react/tree/main/react13-rtkRaw)
+### 2: [```index2.js``` --> ```redux-toolkit```](https://github.com/hiimvikash/react/tree/main/react13-rtkRaw)
+- Here we're adding icecreams in our shop
 #### ```output```
 ```js
 PS D:\react-git> cd react13-rtkRaw
@@ -1772,3 +1774,128 @@ Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
 Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
 PS D:\react-git\react13-rtkRaw> 
 ```
+
+### 3 : Add logger MiddleWare
+```store.js```
+```js
+const configureStore = require("@reduxjs/toolkit").configureStore;
+const cakeReducer = require("../features/cake/cakeSlice");
+const icecreamReducer = require("../features/icecream/icecreamSlice")
+
+const reduxLogger = require('redux-logger');
+const logger = reduxLogger.createLogger();
+
+const store = configureStore({
+  reducer: {
+    cake: cakeReducer,
+    icecream : icecreamReducer
+  },
+  middleware : (getDefaultMiddleware)=> getDefaultMiddleware().concat(logger)
+
+});
+module.exports = store;
+```
+```output```
+```js
+PS D:\react-git\react14-rtkRaw-MW> node index
+Initial state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+ action cake/ordered @ 13:34:09.039
+   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+   action     { type: 'cake/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 20 } }
+ action cake/ordered @ 13:34:09.043
+   prev state { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 20 } }
+   action     { type: 'cake/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 20 } }
+ action cake/ordered @ 13:34:09.044
+   prev state { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 20 } }
+   action     { type: 'cake/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 20 } }
+ action cake/restocked @ 13:34:09.045
+   prev state { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 20 } }
+   action     { type: 'cake/restocked', payload: 3 }
+   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+ action icecream/ordered @ 13:34:09.046
+   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+   action     { type: 'icecream/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 19 } }
+ action icecream/ordered @ 13:34:09.048
+   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 19 } }
+   action     { type: 'icecream/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 18 } }
+ action icecream/ordered @ 13:34:09.050
+   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 18 } }
+   action     { type: 'icecream/ordered', payload: undefined }
+   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
+ action icecream/restocked @ 13:34:09.053
+   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
+   action     { type: 'icecream/restocked', payload: 3 }
+   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+PS D:\react-git\react14-rtkRaw-MW>
+```
+
+### 4. Add the functionality - ```Whoever takes the cake get one icecream free```.
+
+- In ```redux``` you implemented like, here you're just listening cakeActions and reducing Icecream from stock :- 
+
+```js
+  // .............edited from index2.js
+  // create reducer : is like a icecream shopkeeper
+  const icreamreducer = (state = icreaminitialState, action)=>{
+    switch(action.type){
+        case 'ICREAM_ORDERED' : return {
+            ...state, 
+            numOfIcream : state.numOfIcream - action.quantity
+        }
+
+        case 'ICREAM_RESTOCKED' : return {
+          ...state, 
+          numOfIcream : state.numOfIcream + action.quantity
+        }
+
+        case 'CAKE_ORDERED' : return {
+            ...state, 
+            numOfIcream : state.numOfIcream - 1
+        }
+
+        default : return state
+    }
+  }
+```
+- extraReducers allows createSlice to respond and update its own state in response to other action types besides the types it has generated.
+- Notice the logged output of step 3, there you will notice ```action.type = "cake/ordered", "icecream/ordered"```
+- In ```rtk``` you modify your ```icecreamSlice.js``` like :-
+
+```js
+const cakeActions = require("../cake/cakeSlice").cakeActions;
+
+const icecreamSlice = createSlice({
+    name : "icecream",
+    initialState : {
+        numOfIcecreams : 20
+    },
+    reducers : {
+        ordered : (state)=>{
+            state.numOfIcecreams--;
+        },
+        restocked : (state, action)=>{
+            state.numOfIcecreams+=action.payload;
+        }
+    },
+
+    extraReducers : (builder) => {
+        builder.addCase(cakeActions.ordered, (state) =>{
+            state.numOfIcecreams--
+        })
+    }
+});
+```
+  ```output```
+  ```js
+  Node.js v20.11.0
+  PS D:\react-git\react13-rtkRaw> node index
+  Initial state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+  Updated state  { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 19 } }
+  Updated state  { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 18 } }
+  Updated state  { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 17 } }
+  ```
