@@ -1519,7 +1519,7 @@ Redux promotes immutable updates to the state. Instead of directly modifying the
 - 1 cake initial state
 - 1 cake shopkeeper -> 1 reducer() for cake
 - 2 typeof customer action -> 2 action creator
-#### ```index.js```
+#### ```index1.js```
 ```js
 const redux = require('redux')
 
@@ -1596,7 +1596,7 @@ console.log("unsub", store.getState())
 - 2 initial state (cake & icecream)
 - 2 shopkeeper(cake & icecream) & -> 2 reducer() for cake & icecream
 - 4 typeof customer action -> 4 action creator
-#### ```index.js```
+#### ```index2.js```
 ```js
 const redux = require('redux')
 
@@ -1869,8 +1869,8 @@ Some points to 🧹 your 🧠
 - Redux toolkit is a library for efficient redux development
 - React-redux is a library that provides bindings to use React and Redux (Toolkit) together in an application
 
+#### ```index1.js``` --> ```redux-toolkit```
 ![alt text](redux-rtk.png)
-
 #### ```output```
 
 ```js
@@ -1890,3 +1890,5 @@ Updated State { numOfCakes: 4 }
 Updated State { numOfCakes: 7 }
 unsub { numOfCakes: 6 }
 ```
+
+#### [```index2.js``` --> ```redux-toolkit```]()
