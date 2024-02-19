@@ -1870,3 +1870,23 @@ Some points to 🧹 your 🧠
 - React-redux is a library that provides bindings to use React and Redux (Toolkit) together in an application
 
 ![alt text](redux-rtk.png)
+
+#### ```output```
+
+```js
+PS D:\react-git\react13-rtkRaw> node index
+Initial state  { cake: { numOfCakes: 10 } }
+Updated state  { cake: { numOfCakes: 9 } }
+Updated state  { cake: { numOfCakes: 8 } }
+Updated state  { cake: { numOfCakes: 7 } }
+Updated state  { cake: { numOfCakes: 10 } }
+PS D:\react-git\react13-rtkRaw> cd..
+PS D:\react-git> cd react12-reduxRaw
+PS D:\react-git\react12-reduxRaw> node index
+Initial State { numOfCakes: 10 }
+Updated State { numOfCakes: 8 }
+Updated State { numOfCakes: 7 }
+Updated State { numOfCakes: 4 }
+Updated State { numOfCakes: 7 }
+unsub { numOfCakes: 6 }
+```
