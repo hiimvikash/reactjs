@@ -1715,54 +1715,6 @@ PS D:\react-git\react12-reduxRaw>
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## What is Redux-toolkit ?
 
 Redux is great, but it does have a few shortcomings
@@ -1805,3 +1757,18 @@ unsub { numOfCakes: 6 }
 ```
 
 #### [```index2.js``` --> ```redux-toolkit```](https://github.com/hiimvikash/react/tree/main/react13-rtkRaw)
+#### ```output```
+```js
+PS D:\react-git> cd react13-rtkRaw
+PS D:\react-git\react13-rtkRaw> node index
+Initial state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+Updated state  { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 20 } }
+Updated state  { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 20 } }
+Updated state  { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 20 } }
+Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 19 } }
+Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 18 } }
+Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
+Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
+PS D:\react-git\react13-rtkRaw> 
+```
