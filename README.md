@@ -1907,6 +1907,8 @@ const icecreamSlice = createSlice({
 - ```createAsyncThunk``` is a **action creator**.
 - It takes two arguments: a string typePrefix and an async callback function. The ```typePrefix``` is a string that serves as a prefix for the action types dispatched by the thunk action creator.
 - The async callback function is responsible for performing asynchronous operations, such as making API calls, and returning a promise.
+<img src="./APIrtk.gif" width="500px">
+
 ```js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
