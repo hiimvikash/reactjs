@@ -1741,7 +1741,7 @@ Some points to 🧹 your 🧠
 
 ```js
 PS D:\react-git\react13-rtkRaw> node index
-Initial state  { cake: { numOfCakes: 10 } }
+Initial state  { cake: { numOfCakes: 10 } } // "cake" is the name given in store
 Updated state  { cake: { numOfCakes: 9 } }
 Updated state  { cake: { numOfCakes: 8 } }
 Updated state  { cake: { numOfCakes: 7 } }
@@ -1901,3 +1901,43 @@ const icecreamSlice = createSlice({
   Updated state  { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 18 } }
   Updated state  { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 17 } }
   ```
+### 5. API calling
+- Reducers should be pure functions that take the previous state and an action, and return the next state. They should not have side effects like making API calls.
+- so In ```rtk``` we do API calling in ```createAsyncThunk```
+- ```createAsyncThunk``` is a **action creator**.
+- It takes two arguments: a string typePrefix and an async callback function. The ```typePrefix``` is a string that serves as a prefix for the action types dispatched by the thunk action creator.
+- The async callback function is responsible for performing asynchronous operations, such as making API calls, and returning a promise.
+```js
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+const initialState = {
+    loading : false,
+    users : [],
+    error : ""
+}
+// dispatch(fetchUser()) ---> this will initiate API call and dispatch actions like "fetchme/pending"
+export const fetchUser = createAsyncThunk("fetchme", async ()=>{ // "fetchme" can be anything it is used as a actionType prefix
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    return response.json();
+})
+const userSlice = createSlice({
+    name : "user",
+    initialState,
+    extraReducers : (builder)=>{
+        
+        builder.addCase('fetchme/pending', (state)=>{ // this are the actions type created by asyncThunk
+            state.loading = true;
+        }),
+        builder.addCase('fetchme/rejected', (state, action)=>{
+            state.loading = false;
+            console.log(action.payload)
+            state.error = "404 not fetched"
+        }),
+        builder.addCase(fetchUser.fulfilled, (state, action)=>{
+            console.log(action.type) // fetchme/fulfilled
+            state.loading = false;
+            state.users = action.payload
+        })
+    }
+})
+export default userSlice.reducer
+```
