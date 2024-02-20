@@ -1907,6 +1907,8 @@ const icecreamSlice = createSlice({
 - ```createAsyncThunk``` is a **action creator**.
 - It takes two arguments: a string typePrefix and an async callback function. The ```typePrefix``` is a string that serves as a prefix for the action types dispatched by the thunk action creator.
 - The async callback function is responsible for performing asynchronous operations, such as making API calls, and returning a promise.
+- createAsyncThunk accepts a "payload creator" callback that should return a Promise, and generates pending/fulfilled/rejected action types automatically
+
 <img src="./APIrtk.gif" width="500px">
 
 ```js
@@ -1943,3 +1945,5 @@ const userSlice = createSlice({
 })
 export default userSlice.reducer
 ```
+
+### [6. Making cake and Icecream shop in react using rtk](https://github.com/hiimvikash/react/tree/main/react15-reactrtk)
