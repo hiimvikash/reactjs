@@ -1,3 +1,15 @@
+# 00. React
+- Install nodejs
+- Enter in folder where you want to keep all yours project
+- ```npm create vite@latest```
+- ```cd project_name``` ```npm i``` ```npm run dev```
+- Why react is called Single Page Applications ?
+  - **Component-Based Architecture:** React encourages developers to break down the user interface into small, reusable components. These components can be easily managed and updated, allowing for a more dynamic user experience.
+
+  - **Virtual DOM:** React uses a virtual DOM to efficiently update the UI. When data changes, React compares the virtual DOM with the real DOM and only updates the parts of the page that have changed. This approach minimizes the need for full-page reloads, which is essential for SPAs.
+
+  - **Client-Side Routing:** React Router is a popular library used for client-side routing in React applications. It allows developers to define different "routes" within the application and render different components based on the URL. This enables SPAs to have multiple views without needing to reload new pages from the server.
+- components should start with capital letters.  
 # 01. Hello World App
 
 ```js
