@@ -834,7 +834,7 @@ export default Product;
 ![image](https://github.com/hiimvikash/react/assets/71629248/c2b8c8c5-f4c7-4b9f-8fdf-a9145758f16b)
 ![image](https://github.com/hiimvikash/react/assets/71629248/dbaa7279-72c4-4c52-b14d-1337f132b920)
 
-- `useCurrencyInfo.js` is a <b>hook</b>(assume it as function) which take input as the Fromcurrency and gives the conversion-rate for other currency [click here for API](https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json).
+- `useCurrencyInfo.js` is a <b>hook</b>(assume it as function) which take input as the Fromcurrency and gives the conversion-rate for other currency [click here for API](https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json).
 - `InputBox.jsx` is a component which contains `label`, `input`, & `selection`.
 
   #### useCurrencyInfo.js
@@ -845,7 +845,7 @@ export default Product;
     const [data, setData] = useState({});
     useEffect(() => {
       fetch(
-        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`
+        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
       )
         .then((res) => res.json())
         .then((res) => setData(res[currency]));
