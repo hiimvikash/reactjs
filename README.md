@@ -263,9 +263,10 @@ export default function Btn({color, setColor}){
 # 05.Little Concept to read :
 
 - [State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
+- [React Render](https://react.dev/learn/render-and-commit)
 - [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
 - [useState()](https://react.dev/reference/react/useState)
-- always use `setSomething` **inside some eventhandler** to avoid infinite loop
+- always use `setSomething` **inside some eventhandler(like click events)** to avoid infinite loop
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
 
 # 06.useEffect() : whenever there is changed in dependencies CB fun inside useEffect() is called
