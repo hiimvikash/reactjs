@@ -11,5 +11,4 @@ const store = configureStore({
         use : userReducer
     }
 });
-
 export default store;

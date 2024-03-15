@@ -6,7 +6,7 @@ export default function IcecreamView() {
     const [val, setVal] = useState(1);
     const dispatch = useDispatch();
     const icecreamState = useSelector((state) => state.ice)
-    console.log(icecreamState)
+    console.log(ordered(3));
 
   return (
     <>
