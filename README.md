@@ -1800,66 +1800,7 @@ Updated state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
 PS D:\react-git\react13-rtkRaw> 
 ```
 
-### 3 : Add logger MiddleWare
-```store.js```
-```js
-const configureStore = require("@reduxjs/toolkit").configureStore;
-const cakeReducer = require("../features/cake/cakeSlice");
-const icecreamReducer = require("../features/icecream/icecreamSlice")
-
-const reduxLogger = require('redux-logger');
-const logger = reduxLogger.createLogger();
-
-const store = configureStore({
-  reducer: {
-    cake: cakeReducer,
-    icecream : icecreamReducer
-  },
-  middleware : (getDefaultMiddleware)=> getDefaultMiddleware().concat(logger)
-
-});
-module.exports = store;
-```
-```output```
-```js
-PS D:\react-git\react14-rtkRaw-MW> node index
-Initial state  { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
- action cake/ordered @ 13:34:09.039
-   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
-   action     { type: 'cake/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 20 } }
- action cake/ordered @ 13:34:09.043
-   prev state { cake: { numOfCakes: 9 }, icecream: { numOfIcecreams: 20 } }
-   action     { type: 'cake/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 20 } }
- action cake/ordered @ 13:34:09.044
-   prev state { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 20 } }
-   action     { type: 'cake/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 20 } }
- action cake/restocked @ 13:34:09.045
-   prev state { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 20 } }
-   action     { type: 'cake/restocked', payload: 3 }
-   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
- action icecream/ordered @ 13:34:09.046
-   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
-   action     { type: 'icecream/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 19 } }
- action icecream/ordered @ 13:34:09.048
-   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 19 } }
-   action     { type: 'icecream/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 18 } }
- action icecream/ordered @ 13:34:09.050
-   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 18 } }
-   action     { type: 'icecream/ordered', payload: undefined }
-   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
- action icecream/restocked @ 13:34:09.053
-   prev state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 17 } }
-   action     { type: 'icecream/restocked', payload: 3 }
-   next state { cake: { numOfCakes: 10 }, icecream: { numOfIcecreams: 20 } }
-PS D:\react-git\react14-rtkRaw-MW>
-```
-
-### 4. Add the functionality - ```Whoever takes the cake get one icecream free```.
+### 3. Add the functionality - ```Whoever takes the cake get one icecream free```.
 
 - In ```redux``` you implemented like, here you're just listening cakeActions and reducing Icecream from stock :- 
 
@@ -1926,7 +1867,7 @@ const icecreamSlice = createSlice({
   Updated state  { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 18 } }
   Updated state  { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 17 } }
   ```
-### 5. API calling
+### 4. API calling
 - Reducers should be pure functions that take the previous state and an action, and return the next state. They should not have side effects like making API calls.
 - so In ```rtk``` we do API calling in ```createAsyncThunk```
 - ```createAsyncThunk``` is a **action creator**.
@@ -1971,4 +1912,4 @@ const userSlice = createSlice({
 export default userSlice.reducer
 ```
 
-### [6. Making cake and Icecream shop in react using rtk](https://github.com/hiimvikash/react/tree/main/react15-reactrtk)
+### [5. Making cake and Icecream shop in react using rtk](https://github.com/hiimvikash/react/tree/main/react15-reactrtk)
