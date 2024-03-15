@@ -1865,7 +1865,7 @@ const icecreamSlice = createSlice({
     },
 
     extraReducers : (builder) => {
-        builder.addCase(cakeActions.ordered, (state) =>{
+        builder.addCase(cakeActions.ordered, (state) =>{ // can give action type as "cake/ordered", here "cakeActions.ordered" is a actionCreator
             state.numOfIcecreams--
         })
     }
@@ -1880,6 +1880,35 @@ const icecreamSlice = createSlice({
   Updated state  { cake: { numOfCakes: 8 }, icecream: { numOfIcecreams: 18 } }
   Updated state  { cake: { numOfCakes: 7 }, icecream: { numOfIcecreams: 17 } }
   ```
+
+ #### Look @ `icecreamSlice.js` from react-rtk
+    ```js
+    import { createSlice } from "@reduxjs/toolkit";
+    import {ordered as orderCake} from '../cake/cakeSlice'
+    const initialState = {
+        numOfIcecreams : 20
+    }
+    const icecreamSlice = createSlice({
+        name : "icecream",
+        initialState,
+        reducers : {
+            ordered(state, action){
+                state.numOfIcecreams -= action.payload
+            }, 
+            restocked(state, action){
+                state.numOfIcecreams += action.payload
+            }
+        },
+        extraReducers : (builder) => {
+            builder.addCase(orderCake, (state)=>{ // can give action type as "cake/ordered", here orderCake is a actionCreator
+                state.numOfIcecreams--
+            })
+        }
+    })
+
+    export default icecreamSlice.reducer;
+    export const {ordered, restocked} = icecreamSlice.actions;
+    ```
 ### 4. API calling
 - Reducers should be pure functions that take the previous state and an action, and return the next state. They should not have side effects like making API calls.
 - so In ```rtk``` we do API calling in ```createAsyncThunk```
