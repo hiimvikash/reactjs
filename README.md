@@ -1410,6 +1410,26 @@ In this example:
 
 Now, let's use this context in our components:
 
+#### App.jsx
+
+```js
+import { ThemeProvider } from "./contexts/ThemeContext";
+import Header from "./Header";
+import Content from "./Content";
+import "./App.css";
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Header />
+      <Content />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+```
+
 #### Header.jsx
 
 ```js
@@ -1451,26 +1471,6 @@ export default function Content() {
     </>
   );
 }
-```
-
-#### App.jsx
-
-```js
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Header from "./Header";
-import Content from "./Content";
-import "./App.css";
-
-function App() {
-  return (
-    <ThemeProvider>
-      <Header />
-      <Content />
-    </ThemeProvider>
-  );
-}
-
-export default App;
 ```
 
 ### Example 3 :
