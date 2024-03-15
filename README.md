@@ -1926,3 +1926,5 @@ export default userSlice.reducer
 ```
 
 ### [5. Making cake and Icecream shop in react using rtk](https://github.com/hiimvikash/react/tree/main/react15-reactrtk)
+![image](https://github.com/hiimvikash/reactjs/assets/71629248/6f3822af-dcb8-44c7-b4a3-037b797af612)
+
