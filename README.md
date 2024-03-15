@@ -1882,33 +1882,33 @@ const icecreamSlice = createSlice({
   ```
 
  #### Look @ `icecreamSlice.js` from react-rtk
-    ```js
-    import { createSlice } from "@reduxjs/toolkit";
-    import {ordered as orderCake} from '../cake/cakeSlice'
-    const initialState = {
-        numOfIcecreams : 20
-    }
-    const icecreamSlice = createSlice({
-        name : "icecream",
-        initialState,
-        reducers : {
-            ordered(state, action){
-                state.numOfIcecreams -= action.payload
-            }, 
-            restocked(state, action){
-                state.numOfIcecreams += action.payload
-            }
-        },
-        extraReducers : (builder) => {
-            builder.addCase(orderCake, (state)=>{ // can give action type as "cake/ordered", here orderCake is a actionCreator
-                state.numOfIcecreams--
-            })
-        }
-    })
+  ```js
+  import { createSlice } from "@reduxjs/toolkit";
+  import {ordered as orderCake} from '../cake/cakeSlice'
+  const initialState = {
+      numOfIcecreams : 20
+  }
+  const icecreamSlice = createSlice({
+      name : "icecream",
+      initialState,
+      reducers : {
+          ordered(state, action){
+              state.numOfIcecreams -= action.payload
+          }, 
+          restocked(state, action){
+              state.numOfIcecreams += action.payload
+          }
+      },
+      extraReducers : (builder) => {
+          builder.addCase(orderCake, (state)=>{ // can give action type as "cake/ordered", here orderCake is a actionCreator
+              state.numOfIcecreams--
+          })
+      }
+  })
 
-    export default icecreamSlice.reducer;
-    export const {ordered, restocked} = icecreamSlice.actions;
-    ```
+  export default icecreamSlice.reducer;
+  export const {ordered, restocked} = icecreamSlice.actions;
+  ```
 ### 4. API calling
 - Reducers should be pure functions that take the previous state and an action, and return the next state. They should not have side effects like making API calls.
 - so In ```rtk``` we do API calling in ```createAsyncThunk```
