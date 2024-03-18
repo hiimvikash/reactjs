@@ -979,8 +979,6 @@ export default Product;
 
 - With React Router, you can create single-page applications (SPAs) where the page doesn't reload entirely when users navigate between different sections of your app.
 
-## Now after following the below steps you will be able to `navigate to different URL and render your particular page-component without refreshing the page` + You will be able to `handle invalid path` 😄.
-
 ## Note : Rendering of page without refreshing is only possible when you use NavLinks to navigate to other URL. If you're changing URL for navigation then it will cause refresh obviously.
 
 #### Step 1 : install react-router-dom in your Project
@@ -1006,188 +1004,7 @@ export default Product;
   </NavLink>
   ```
 
-#### Step 3 : changes in `Main.jsx`
-
-- imports from react-router-dom
-  ```js
-  import { createBrowserRouter, RouterProvider } from "react-router-dom";
-  ```
-- calling <b>createBrowserRouter</b> function and storing the reference in some variable.
-  - createBrowserRouter <b>creates different path(end-url)</b> for rendering different components.
-  - Argument passed is <b>a array of objects-routes</b>
-  - a object-route contains keys like `path`, `element` (page to render when particular path is hit), `errorElement`(to render error page when invalid path is hit)
-
-```js
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <NotFound />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/contact",
-    element: <ContactUS />,
-  },
-]);
-```
-
-- Now render the `RouterProvider` component and pass the `router`(containing <b>When to render</b> and <b>What to render</b>) inside <b>router props</b>
-  ```js
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
-  ```
-
-## Here we will learn `dynamic paths`
-
-![image](https://github.com/hiimvikash/react/assets/71629248/e0855460-33e7-4f43-a428-9f5016c8ecc1)
-
-- In above URL `leetcode.com/problemset` is coded.
-- when you select a Q from the given list of thousands Qs, the URL changes to something like : `leetcode.com/problemset/two-sum` or `leetcode.com/problemset/palindrome-number`.
-- and the page which renders is of same layout(Left-Side is Q describtion, Right-Side is code editor, Bottom is console...)
-
-### So what do you think 🤔 did they coded manually the paths for thousands of Qs ?
-
-ofc no. so Here comes the <b>dynamic paths.</b>
-
-#### Step 4 : setup like this :
-
-![image](https://github.com/hiimvikash/react/assets/71629248/ad493f6f-4446-48d7-a07e-1a704e0a1c7a)
-
-- Here highlighted thing in createBrowserRouter is called `params` which says : <b>Whenever user hit to `/profiles/[anything]` then `<Profile/>` will be rendered.</b>
-- In `<Profile/>` page-component, we are importing `useParams` and then extracting the `[anything]` of URL.
-- `useParams()` gives the object containing `{profileID:1}` so we extracted that and used further.
-- `<Profiles/>` is just containing similar `<NavLink to='/profiles/1'> profile 1 </NavLink>`
-
-### Problem : NavLinks are in `/profiles` only so when we reach to `/profiles/4` then we again need to travel back to `/profiles` to get NavLinks.
-
-### Solution :-
-
-- Here you're telling that whenever URL is hit @ `/profiles/[anything]` then `<Profile/>` will be render in `<Profiles/>`
-  ```js
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-      errorElement: <NotFound />,
-    },
-    {
-      path: "/about",
-      element: <About />,
-    },
-    {
-      path: "/contact",
-      element: <ContactUS />,
-    },
-    {
-      path: "/profiles",
-      element: <Profiles />,
-      children: [
-        {
-          path: "/profiles/:profileID",
-          element: <Profile />,
-        },
-      ],
-    },
-  ]);
-  ```
-- Now when you click on the NavLink you will notice URL only changes and page remains constant, but `<Profile/>` is not rendered.
-- this is because you need to specify the placeholder in `<Profiles/>` where you want to render your `<Profile/>` page.
-- this can be achived using `<Outlet/>`.
-
-##### Profiles.jsx
-
-```js
-import { NavLink, Outlet } from "react-router-dom";
-export function Profiles() {
-  const Navstyle = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    fontSize: "25px",
-  };
-
-  const mainStyle = {
-    display: "flex",
-    gap: "10%",
-  };
-
-  return (
-    <div style={mainStyle}>
-      <div style={Navstyle}>
-        <NavLink to="/profiles/1">profile 1</NavLink>
-        <NavLink to="/profiles/2">profile 2</NavLink>
-        <NavLink to="/profiles/3">profile 3</NavLink>
-        <NavLink to="/profiles/4">profile 4</NavLink>
-        <NavLink to="/profiles/5">profile 5</NavLink>
-      </div>
-
-      <Outlet />
-    </div>
-  );
-}
-```
-
-## SOME OTHER WAYS TO visualise createBrowserRouter.
-
-### Way 1 :
-
-- component which may remain constant throughout the websites are : navbar and footer.
-- Here `<Layout/>` is like parentPage containing that component which remain constant and will render in everypage like Home, About, Contact.
-  ##### Layout.jsx
-  ```js
-  import React from "react";
-  import Header from "./components/Header/Header";
-  import Footer from "./components/Footer/Footer";
-  import { Outlet } from "react-router-dom";
-
-  function Layout() {
-    return (
-      <>
-        <Header />
-        <Outlet />
-        <Footer />
-      </>
-    );
-  }
-
-  export default Layout;
-  ```
-  ##### Main.jsx
-  ```js
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "",
-          element: <Home />,
-        },
-        {
-          path: "about",
-          element: <About />,
-        },
-        {
-          path: "contact",
-          element: <Contact />,
-        },
-        {
-          path: "user/:userID",
-          element: <User />,
-        },
-      ],
-    },
-  ]);
-  ```
-
-## Final Way : (Final way to implement)
+## Implemention
 
 #### Main.jsx
 
@@ -1202,7 +1019,7 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="*" element={<NotFound />} />
+      <Route index element={<Welcome />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<ContactUS />} />
@@ -1210,6 +1027,7 @@ const router = createBrowserRouter(
         <Route path=":profileID" element={<Profile />} />
       </Route>
       <Route loader={githubInfoLoader} path="github" element={<GitHub />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
