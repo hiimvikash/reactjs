@@ -1782,7 +1782,7 @@ export default userSlice.reducer
   1. Direct use for API calls.
   1. use with redux store.
 ## Way 1 : Direct use for API calls.
-- `features/apiSlice.js`
+- `redux/apiSlice.js`
   ```js
   import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
