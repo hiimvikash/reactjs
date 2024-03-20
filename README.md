@@ -1845,7 +1845,7 @@ export default userSlice.reducer
   - Here, API is called on initial render only, but **users[] State** is empty.
   - **users[] State** will be filled with data(after refetching) when button clicked.
 ```js
-  import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.css'
 import { useFetchUsersQuery } from '../redux/apiSlice'
