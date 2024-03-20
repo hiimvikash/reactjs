@@ -1775,3 +1775,119 @@ export default userSlice.reducer
 ### [5. Making cake and Icecream shop in react using rtk](https://github.com/hiimvikash/react/tree/main/react15-reactrtk)
 ![image](https://github.com/hiimvikash/reactjs/assets/71629248/6f3822af-dcb8-44c7-b4a3-037b797af612)
 
+# 16. RTK Query
+- read this [doc](https://redux-toolkit.js.org/rtk-query/overview)
+- [video reference](https://youtu.be/60ELggkwLHc?si=Qr1NgYT1xOLKP601)
+- 2 Ways to use RTK query
+  1. Direct use for API calls.
+  1. use with redux store.
+## Way 1 : Direct use for API calls.
+- `features/apiSlice.js`
+  ```js
+  import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+  // Define your API slice using createApi
+  export const apiSlice = createApi({
+    reducerPath: 'api', 
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+    endpoints: (builder) => ({
+      fetchUsers: builder.query({query: () => 'users'})
+    }),
+  });
+
+  // Export generated hooks for each endpoint
+  export const { useFetchUsersQuery } = apiSlice;
+  ```
+- `Main.jsx`
+  ```js
+  import React from 'react'
+  import ReactDOM from 'react-dom/client'
+  import App from './App.jsx'
+  import './index.css'
+
+  import { ApiProvider } from '@reduxjs/toolkit/query/react'
+  import { apiSlice } from '../redux/apiSlice.js'
+
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <ApiProvider api={apiSlice}>
+      <App />
+      </ApiProvider>
+    </React.StrictMode>,
+  )
+  ```
+- `App.jsx` : API call on mount
+  ```js
+  import './App.css'
+  import { useFetchUsersQuery } from '../redux/apiSlice'
+
+  function App() {
+    const {data, isLoading} = useFetchUsersQuery();
+
+    return (
+      <>
+        {/* <button onClick={handleClick}>Feth Users</button> */}
+        <h2>Users List</h2>
+        {isLoading ? (<p>Loading users...</p>) : (
+          <ul>
+          {data.map((user) => (
+            <li key={user.id}>{user.id} & {user.first_name}</li>
+          ))}
+        </ul>
+        )}
+      </>
+    )
+  }
+
+  export default App
+  ```
+- `App.jsx` : API call on button click
+  - Here, API is called on initial render only, but **users[] State** is empty.
+  - **users[] State** will be filled with data(after refetching) when button clicked.
+```js
+  import { useEffect, useState } from 'react'
+
+import './App.css'
+import { useFetchUsersQuery } from '../redux/apiSlice'
+
+function App() {
+  const { data:fetchedData , refetch } = useFetchUsersQuery();
+
+  let [users, setUsers] = useState([]);
+  let [loading, setLoading] = useState(false);
+  let [clicked, setClicked] = useState(false);
+
+  const handleClick = async ()=>{
+    setClicked(true);
+    setLoading(true);
+
+    await refetch();
+
+    setLoading(false);
+    setClicked(false); // orelse fetching data would have not been updated and displayed.
+  }
+
+  useEffect(()=>{
+    if(fetchedData) setUsers(fetchedData);
+  }, [clicked])
+
+  return (
+    <>
+      <button onClick={handleClick}>Feth Users</button>
+      {loading && (<h2>Loading users...</h2>)}
+      
+      {users.length > 0 && (
+        <ul>
+        <h2>UserList</h2>
+        {users.map((user) => (
+          <li key={user.id}>{user.id} & {user.first_name}</li>
+        ))}
+      </ul>
+      )}
+    </>
+  )
+}
+
+export default App
+```  
+
