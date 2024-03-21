@@ -1894,7 +1894,8 @@ export default App
 - [see the code for POST request in server](https://github.com/hiimvikash/reactjs/blob/main/react16-rrtkQuery/redux/apiSlice.js)
 
 **Invalidate Tag** : In RTK Query, when you invalidate a tag using invalidateTags, it marks all queries associated with that tag as stale. This means that the cached data for those queries is no longer considered valid, and the library will automatically refetch the data the next time those queries are executed.
-By marking the data as stale and triggering a refetch, RTK Query ensures that your application always has access to the most recent data from your API, even if the data has changed on the server since it was last fetched. This helps keep your application's UI up-to-date with the latest information available from the API.
+
+By marking the data as stale and triggering a refetch, RTK Query ensures that your application always has access to the most recent data from your API, even if the data has changed on the server since it was last fetched. This helps keep your application's UI up-to-date with the latest information available from the API. **You can check this when : `App.jsx` API call on mount**
 
 
 
