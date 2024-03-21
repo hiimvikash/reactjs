@@ -2,52 +2,39 @@
   "users": [
     {
       "id": 1,
-      "first_name": "Ashish",
-      "last_name": "Magnus",
-      "email": "mmagnus0@devhub.com",
-      "gender": "Female",
-      "job_title": "Senior Cost Accountant"
+      "first_name": "Ashish"
     },
     {
       "id": 2,
-      "first_name": "Peterus",
-      "last_name": "Lere",
-      "email": "plere1@rambler.ru",
-      "gender": "Male",
-      "job_title": "General Manager"
+      "first_name": "Suman"
     },
     {
       "id": 3,
-      "first_name": "Dorena",
-      "last_name": "Sturrock",
-      "email": "dsturrock2@google.com.hk",
-      "gender": "Female",
-      "job_title": "Social Worker"
+      "first_name": "Mahendra"
     },
     {
       "id": 4,
-      "first_name": "Noble",
-      "last_name": "Genney",
-      "email": "ngenney3@gov.uk",
-      "gender": "Male",
-      "job_title": "VP Marketing"
+      "first_name": "Harry"
     },
     {
       "id": 5,
-      "first_name": "Alphonse",
-      "last_name": "Jorgesen",
-      "email": "ajorgesen4@shareasale.com",
-      "gender": "Male",
-      "job_title": "Programmer IV"
+      "first_name": "Alphonse"
     },
-
     {
       "first_name": "Vikash",
-      "last_name": "Gupta",
-      "email": "vikash@gmail.com",
-      "job_title": "SDE",
-      "gender": "Male",
-      "id": 1000
+      "id": 6
+    },
+    {
+      "id": 912.7510156182217,
+      "first_name": "hi"
+    },
+    {
+      "id": 930.4553127724533,
+      "first_name": "LuluMall"
+    },
+    {
+      "id": 87.43232925910883,
+      "first_name": "hello"
     }
   ]
 }
