@@ -1897,6 +1897,7 @@ export default App
 
 By marking the data as stale and triggering a refetch, RTK Query ensures that your application always has access to the most recent data from your API, even if the data has changed on the server since it was last fetched. This helps keep your application's UI up-to-date with the latest information available from the API. **You can check this when : `App.jsx` API call on mount**
 
+## Way 2 : [RTK query with redux store](https://github.com/hiimvikash/reactjs/blob/main/react17-rr-rtkQuery/app/store.js)
 
 
 
