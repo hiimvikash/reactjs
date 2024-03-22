@@ -59,7 +59,7 @@ const postsSlice = createSlice({
     },
 
     addReaction(state, action) {
-        const { postId, reaction } = action.payload
+        const { postId, reaction } = action.payload 
         const existingPost = state.find(post => post.id === postId)
         if (existingPost) {
             existingPost.reactions[reaction]++
@@ -68,4 +68,5 @@ const postsSlice = createSlice({
   },
 });
 export const { addPost, addReaction } = postsSlice.actions;
+export const selectAllPosts = (state)=>state.poo;
 export default postsSlice.reducer;
