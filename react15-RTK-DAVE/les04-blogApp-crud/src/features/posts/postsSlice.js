@@ -7,9 +7,11 @@ const initialState = {
   error: null
 }
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
+
 export const fetchPosts = createAsyncThunk('getme', async () => {
     const response = await fetch(POSTS_URL)
-    return response.json();
+    const responseData = await response.json(); // Await the response.json() method
+    return responseData;
 })
 
 export const addNewPost = createAsyncThunk('postme', async (initialPost) => {
@@ -23,7 +25,47 @@ export const addNewPost = createAsyncThunk('postme', async (initialPost) => {
   };
 
   const response = await fetch(POSTS_URL, requestOptions)
-  return response.json();
+  const responseData = await response.json(); // Await the response.json() method
+  return responseData;
+})
+export const updatePost = createAsyncThunk('updateme', async (initialPost) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+      // You can add more headers if needed, like Authorization headers
+    },
+    body: JSON.stringify(initialPost)
+  };
+
+  const { id } = initialPost;
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`, requestOptions)
+    const responseData = await response.json(); // Await the response.json() method
+    return responseData;
+  } catch (error) {
+    // return error.message;
+    console.log(initialPost)
+    return initialPost;
+  }
+})
+export const deletePost = createAsyncThunk('deleteme', async (initialPost) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+      // You can add more headers if needed, like Authorization headers
+    },
+    body: JSON.stringify(initialPost)
+  };
+  const { id } = initialPost;
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`, requestOptions)
+    if (response?.status === 200) return initialPost;
+        return `${response?.status}: ${response?.statusText}`;
+  } catch (error) {
+    return error.message;
+  }
 })
 
 const postsSlice = createSlice({
@@ -113,8 +155,32 @@ const postsSlice = createSlice({
             rocket: 0,
             coffee: 0
           }
-          console.log(action.payload)
+          // console.log(action.payload)
           state.posts.push(action.payload)
+        })
+
+
+        .addCase(updatePost.fulfilled, (state, action) => {
+          if (!action.payload?.id) {
+              console.log('Update could not complete')
+              console.log(action.payload)
+              return;
+          }
+          const { id } = action.payload;
+          action.payload.date = new Date().toISOString();
+          const posts = state.posts.filter(post => post.id !== id);
+          state.posts = [...posts, action.payload];
+        })
+
+        .addCase(deletePost.fulfilled, (state, action) => {
+          if (!action.payload?.id) {
+              console.log('Delete could not complete')
+              console.log(action.payload)
+              return;
+          }
+          const { id } = action.payload;
+          const posts = state.posts.filter(post => post.id !== id);
+          state.posts = posts;
         })
       }
 });
@@ -122,7 +188,7 @@ const postsSlice = createSlice({
 export const selectAllPosts =  (state) => state.poo.posts;
 export const getPostsStatus = (state) => state.poo.status;
 export const getPostsError = (state) => state.poo.error;
+export const selectPostById = (state, postId) => state.poo.posts.find(post => post.id === postId);
 
 export const { addPost, addReaction } = postsSlice.actions;
-
 export default postsSlice.reducer;
