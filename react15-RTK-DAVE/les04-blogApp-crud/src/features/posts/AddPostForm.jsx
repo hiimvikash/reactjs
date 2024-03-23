@@ -37,7 +37,6 @@ const AddPostForm = () => {
                 // setAddRequestStatus('idle')
             }
         }
-
     }
 
     const usersOptions = users.map(user => (

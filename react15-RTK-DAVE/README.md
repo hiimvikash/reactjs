@@ -189,4 +189,176 @@ export default AddPostForm;
 
 ![ss](https://github.com/hiimvikash/reactjs/assets/71629248/276f406e-2e78-4ff8-a243-be88b9cbed2a)
 
-# [Lesson 03 : Post APP - API](https://github.com/hiimvikash/reactjs/tree/main/react15-RTK-DAVE/les03-postApp-API/src/features/posts)
+# [Lesson 03 : Post App - API](https://github.com/hiimvikash/reactjs/tree/main/react15-RTK-DAVE/les03-postApp-API/src/features/posts)
+# [Lesson 04 :Blog App](https://github.com/hiimvikash/reactjs/tree/main/react15-RTK-DAVE/les04-blogApp-crud)
+## When save post is clicked : `onSavePostClicked()`
+```js
+const onSavePostClicked = () => {
+        if (canSave) {
+            try {
+                // setAddRequestStatus('pending')
+                dispatch(addNewPost({ title, body: content, userId })).unwrap()
+
+                setTitle('')
+                setContent('')
+                setUserId('')
+                navigate('/');
+            } catch (err) {
+                console.error('Failed to save the post', err)
+            } finally {
+                // setAddRequestStatus('idle')
+            }
+        }
+    }
+```
+- `postsSlice.js`
+```js
+export const addNewPost = createAsyncThunk('postme', async (initialPost) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+      // You can add more headers if needed, like Authorization headers
+    },
+    body: JSON.stringify(initialPost)
+  };
+
+  const response = await fetch(POSTS_URL, requestOptions)
+  const responseData = await response.json(); // this will return the initialPost if added sucessfully
+  return responseData;
+})
+
+.addCase(addNewPost.fulfilled, (state, action) => {
+    // Fix for API post IDs:
+    // Creating sortedPosts & assigning the id 
+    // would be not be needed if the fake API 
+    // returned accurate new post IDs
+    const sortedPosts = state.posts.sort((a, b) => {
+        if (a.id > b.id) return 1
+        if (a.id < b.id) return -1
+        return 0
+    })
+    action.payload.id = sortedPosts[sortedPosts.length - 1].id + 1;
+    // End fix for fake API post IDs 
+
+    action.payload.userId = Number(action.payload.userId)
+    action.payload.date = new Date().toISOString();
+    action.payload.reactions = {
+      thumbsUp: 0,
+      wow: 0,
+      heart: 0,
+      rocket: 0,
+      coffee: 0
+    }
+    // console.log(action.payload)
+    state.posts.push(action.payload)
+})
+```
+## When Edit Post is saved
+```js
+    const onSavePostClicked = () => {
+        if (canSave) {
+            try {
+                setRequestStatus('pending')
+                dispatch(updatePost({ id: post.id, title, body: content, userId, reactions: post.reactions })).unwrap()
+
+                setTitle('')
+                setContent('')
+                setUserId('')
+                navigate(`/post/${postId}`)
+            } catch (err) {
+                console.error('Failed to save the post', err)
+            } finally {
+                setRequestStatus('idle')
+            }
+        }
+    }
+```
+- `postSlice.js`
+```js
+export const updatePost = createAsyncThunk('updateme', async (initialPost) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+      // You can add more headers if needed, like Authorization headers
+    },
+    body: JSON.stringify(initialPost)
+  };
+
+  const { id } = initialPost;
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`, requestOptions)
+    const responseData = await response.json(); // Await the response.json() method
+    return responseData;
+  } catch (error) {
+    // return error.message;
+    console.log(initialPost)
+    return initialPost;
+  }
+})
+
+
+.addCase(updatePost.fulfilled, (state, action) => {
+  if (!action.payload?.id) {
+      console.log('Update could not complete')
+      console.log(action.payload)
+      return;
+  }
+  const { id } = action.payload;
+  action.payload.date = new Date().toISOString();
+  const posts = state.posts.filter(post => post.id !== id);
+  state.posts = [...posts, action.payload];
+})
+```
+## When delete post is saved 
+```js
+const onDeletePostClicked = () => {
+    try {
+        setRequestStatus('pending')
+        dispatch(deletePost({ id: post.id })).unwrap()
+
+        setTitle('')
+        setContent('')
+        setUserId('')
+        navigate('/')
+    } catch (err) {
+        console.error('Failed to delete the post', err)
+    } finally {
+        setRequestStatus('idle')
+    }
+}
+```
+- `postSlice.js`
+```js
+export const deletePost = createAsyncThunk('deleteme', async (initialPost) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+      // You can add more headers if needed, like Authorization headers
+    },
+    body: JSON.stringify(initialPost)
+  };
+  const { id } = initialPost;
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`, requestOptions)
+    if (response?.status === 200) return initialPost;
+        return `${response?.status}: ${response?.statusText}`;
+  } catch (error) {
+    return error.message;
+  }
+})
+
+
+.addCase(deletePost.fulfilled, (state, action) => {
+  if (!action.payload?.id) {
+      console.log('Delete could not complete')
+      console.log(action.payload)
+      return;
+  }
+  const { id } = action.payload;
+  const posts = state.posts.filter(post => post.id !== id);
+  state.posts = posts;
+})
+```

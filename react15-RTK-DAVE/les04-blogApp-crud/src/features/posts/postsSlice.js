@@ -25,9 +25,10 @@ export const addNewPost = createAsyncThunk('postme', async (initialPost) => {
   };
 
   const response = await fetch(POSTS_URL, requestOptions)
-  const responseData = await response.json(); // Await the response.json() method
+  const responseData = await response.json(); // this will return the initialPost if added sucessfully
   return responseData;
 })
+
 export const updatePost = createAsyncThunk('updateme', async (initialPost) => {
   const requestOptions = {
     method: 'PUT',
