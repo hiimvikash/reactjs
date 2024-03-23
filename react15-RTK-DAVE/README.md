@@ -311,7 +311,7 @@ export const updatePost = createAsyncThunk('updateme', async (initialPost) => {
   state.posts = [...posts, action.payload];
 })
 ```
-## When delete post is saved 
+## When delete post
 ```js
 const onDeletePostClicked = () => {
     try {
