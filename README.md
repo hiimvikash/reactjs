@@ -326,26 +326,6 @@ export default function Btn({color, setColor}){
 
   - One common use case of useRef is to reference DOM elements directly within functional components.
   - You can attach a ref attribute to a JSX element and assign it the result of useRef. This allows you to manipulate the DOM element programmatically.
-
-- Initial Value:
-
-  - When creating a useRef variable, you can provide an initial value as an argument to useRef(initialValue).
-  - The initial value can be any JavaScript value, such as null, undefined, an object, or a primitive value.
-
-- Accessing DOM Elements:
-
-  - After attaching a ref attribute to a JSX element, you can access the underlying DOM element using the current property of the useRef object.
-  - For example, ref.current provides access to the DOM node associated with the ref.
-
-- Persisting Values:
-
-  - useRef can also be used to persist values across renders without causing re-renders.
-  - Since changing the value of a useRef variable doesn't trigger a re-render, it's suitable for storing values that don't need to be part of the component state.
-
-- Side Effects:
-
-  - useRef is often used to store references to values or objects that should not trigger re-renders but may be used for side effects or imperative code, like error handling of forms input.
-
 - Use Cases:
 
   - Accessing and manipulating DOM elements imperatively.
