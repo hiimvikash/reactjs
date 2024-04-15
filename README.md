@@ -283,6 +283,8 @@ You want to minimise the number of re-renders to make a highly optimal react app
 The more the components that are getting re-rendered, the worse
 
 ![6 1_pages-to-jpg-0012](https://github.com/hiimvikash/reactjs/assets/71629248/385501e1-9889-41d4-a072-f73731fad4b7)
+
+memo lets you skip re-rendering a component when its props are unchanged.
 ![6 1_pages-to-jpg-0013](https://github.com/hiimvikash/reactjs/assets/71629248/ddb74eb7-4dcd-4cb9-816b-55eba227f2c0)
 
 
