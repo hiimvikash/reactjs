@@ -684,8 +684,7 @@ export default Product;
 
 # 10. useCallback()
 
-- useMemo(): Returns and stores the calculated value of a function in a variable.
-- useCallBack(): Returns and stores the actual function itself in a variable.
+- Here the problem is whenever `dark`(State variable) changes it re-initialise the `getItems()` due to this `<List/>` renders on toggle theme also.
 
   ```js
   function App() {
@@ -727,6 +726,8 @@ export default Product;
   }
   export default App;
   ```
+- useMemo(): Returns and stores the calculated value of a function in a variable.
+- useCallBack(): Returns and stores the actual function itself in a variable.
 
 # 11. Password Generator Project
 
