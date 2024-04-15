@@ -269,6 +269,10 @@ export default function Btn({color, setColor}){
 - always use `setSomething` **inside some eventhandler(like click events)** to avoid infinite loop
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
 
+# 5.1. Re-rendering in React
+
+
+
 # 06.useEffect() : whenever there is changed in dependencies CB fun inside useEffect() is called
 
 - useEffect Hook: useEffect is a built-in React Hook used for handling side effects in functional components. Side effects may include data fetching, subscriptions, or manually changing the DOM.
