@@ -287,6 +287,9 @@ The more the components that are getting re-rendered, the worse
 memo lets you skip re-rendering a component when its props are unchanged.
 ![6 1_pages-to-jpg-0013](https://github.com/hiimvikash/reactjs/assets/71629248/ddb74eb7-4dcd-4cb9-816b-55eba227f2c0)
 
+### Tips:-
+- render happen in component which are subscribed to state variable changes, It should not render the buttons which is just changing the state variable. 
+- scenario where you just need to update state variable try only to use this `setCount(count => count+1)` instead `setCount(count+1)` coz using a state variable will cause re-render.
 
 
 
