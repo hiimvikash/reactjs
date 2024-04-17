@@ -270,7 +270,7 @@ export default function Btn({color, setColor}){
 - [invalid hook calls warning](https://react.dev/warnings/invalid-hook-call-warning)
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
 
-## HERE HOW BTNS COMPONENT will even execute AS IT IS IN ELSE STATE.
+## Here, How <Btns> component WILL EXECUTE AS IT IS IN ELSE STATE ?
 ```js
 function App() {
   const[mounted, setMounted] = useState(false);
