@@ -267,6 +267,7 @@ export default function Btn({color, setColor}){
 - [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
 - [useState()](https://react.dev/reference/react/useState)
 - always use `setSomething` **inside some eventhandler(like click events)** to avoid infinite loop
+- [invalid hook calls warning](https://react.dev/warnings/invalid-hook-call-warning)
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
 
 ## HERE HOW BTNS COMPONENT will even execute AS IT IS IN ELSE STATE.
