@@ -1905,6 +1905,8 @@ By marking the data as stale and triggering a refetch, RTK Query ensures that yo
 
 ## Way 2 : [RTK query with redux store](https://github.com/hiimvikash/reactjs/blob/main/react17-rr-rtkQuery/app/store.js)
 
+# [17. Recoil](https://github.com/hiimvikash/reactjs/tree/main/react18-recoil)
+
 
 
 
