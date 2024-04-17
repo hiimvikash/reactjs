@@ -7,7 +7,9 @@ import { RecoilRoot } from 'recoil'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RecoilRoot>
+    {/* <React.Suspense fallback={<div>Loading...</div>}> */}
     <App />
+    {/* </React.Suspense> */}
     </RecoilRoot>
   </React.StrictMode>,
 )

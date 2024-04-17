@@ -269,6 +269,31 @@ export default function Btn({color, setColor}){
 - always use `setSomething` **inside some eventhandler(like click events)** to avoid infinite loop
 - [conditional-rendering](https://react.dev/learn/conditional-rendering)
 
+## HERE HOW BTNS COMPONENT will even execute AS IT IS IN ELSE STATE.
+```js
+function App() {
+  const[mounted, setMounted] = useState(false);
+  useEffect(()=>{
+    setMounted(true);
+  }, [])
+
+  if(!mounted){
+    return <div>Loading...</div>
+  }
+  else{
+  return (
+    <>
+      <Btns/> // doing async Queries here 
+    </>
+  )}
+} HERE HOW BTNS COMPONENT MOUNT AS IT IS IN ELSE STATE.
+```
+## Explanation :-
+- even in conditionnal rendering other blocks component start resolving and complete their mounting process, meaning their lifecycle methods, such as useEffect, are executed. 
+- Only the JSX corresponding to the evaluated branch of the conditional logic is included in the final render output. Components in the other branch are not included in the output, but they have already been mounted and their lifecycle methods have been executed.
+- once useEffect are executed then it renders the component based on condition.
+
+
 # 5.1. Re-rendering in React
 A re-render means that
   1. React did some work to calculate what all should update in this component

@@ -3,28 +3,29 @@ import { notificationsAtom, totalNotificationSelector } from "./atoms"
 import { useEffect, useState } from "react";
 
 function App() {
-    const [isMounted, setIsMounted] = useState(false);
+  const[mounted, setMounted] = useState(false);
+  useEffect(()=>{
+    setMounted(true);
+  }, [])
 
-    useEffect(() => {
-      // Set isMounted to true when the component mounts
-      setIsMounted(true);
-      // Clean up by setting isMounted to false when the component unmounts
-      return () => {
-        setIsMounted(false);
-      };
-    }, []);
+  if(!mounted){
+    return <div>Loading...</div>
+  }
+  else{
   return (
     <>
-      {/* <Btns/> */}
-      {isMounted && <Btns/>}
+      <Btns/>
     </>
-  )
+  )}
 }
 
 function Btns(){
   console.log("children are rendering")
-  const notificationValues = useRecoilValue(notificationsAtom);
+  
 
+
+  // PROBLEM : this is updating the state of react before the component has fully mounted
+  const notificationValues = useRecoilValue(notificationsAtom);
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
   return (
