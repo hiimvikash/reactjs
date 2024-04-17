@@ -2,7 +2,7 @@ import {atom, selector} from "recoil";
 
 export const networkAtom = atom({
     key : "networkAtom",
-    default : 102
+    default : 102 // can have a pure function to dynamically calculate default value
 });
 export const jobsAtom = atom({
     key : "jobsAtom",

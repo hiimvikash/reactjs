@@ -12,7 +12,7 @@ import axios from 'axios'
 // });
 export const notificationsAtom = atom({
     key: "notifications",
-    default: selector({
+    default: selector({ // atoms cannot have async function as their default value so we use selector to fetch data from server
         key: "networkAtomSelector",
         get: async () => {
             // await new Promise(r=>setTimeout(r, 3000)) // sleeps for 3 s
