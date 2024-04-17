@@ -1907,6 +1907,35 @@ By marking the data as stale and triggering a refetch, RTK Query ensures that yo
 
 # [17. Recoil](https://github.com/hiimvikash/reactjs/tree/main/react18-recoil)
 
+# 18. Implement Debouncing
+- Here on Input Change a request is send to server.
+- to avoid many request we will do a server call after 1sec(i.e., when user finish typing).
+- and if within that 1sec if user type again then we will clear the previous clock and start a new clock.
+```js
+let timeout;
+function debouncePopulateDiv() {
+  // how do you cancel a clock?
+  // clearTimeout
+  clearTimeout(timeout);
+  timeout = setTimeout(function() {
+    populateDiv()
+  }, 1000);
+}
+function populateDiv() {
+  // debouncing
+  const a = document.getElementById("firstNumber").value;
+  const b = document.getElementById("secondNumber").value;
+
+  fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+  .then(function(response) {
+    response.text()
+    .then(function(ans) {
+    document.getElementById("finalSum").innerHTML = ans;
+    })
+  });
+}
+```
+
 
 
 
