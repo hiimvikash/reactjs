@@ -1937,6 +1937,8 @@ By marking the data as stale and triggering a refetch, RTK Query ensures that yo
 - Here on Input Change a request is send to server.
 - to avoid many request we will do a server call after 1sec(i.e., when user finish typing).
 - and if within that 1sec if user type again then we will clear the previous clock and start a new clock.
+
+## JS CODE
 ```js
 let timeout;
 function debouncePopulateDiv() {
@@ -1961,7 +1963,50 @@ function populateDiv() {
   });
 }
 ```
+## React JS
+```js
+import React, { useState } from 'react';
+import useDebounce from './useDebounce';
 
+const SearchBar = () => {
+  const [inputValue, setInputValue] = useState('');
+  const debouncedValue = useDebounce(inputValue, 500); // 500 milliseconds debounce delay
+
+  // Use the debouncedValue in your component logic, e.g., trigger a search API call via a useEffect
+
+  return (
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+};
+
+export default SearchBar;
+```
+```js
+import { useState, useEffect } from 'react';
+
+const useDebounce = (value, delay) => {
+  // State to store the debounced value
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    // Set up a timer to update the debounced value after the specified delay
+    const timerId = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Clean up the timer if the value changes before the delay has passed
+    return () => clearTimeout(timerId);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+```
+# 19. [CustomHooks Notes](https://projects.100xdevs.com/tracks/3Vhp7rCJUVjnvFuPxZSZ/Custom-Hooks-5)
 
 
 
