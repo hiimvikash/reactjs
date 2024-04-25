@@ -2008,6 +2008,8 @@ const useDebounce = (value, delay) => {
 ```
 # 19. [CustomHooks Notes](https://projects.100xdevs.com/tracks/3Vhp7rCJUVjnvFuPxZSZ/Custom-Hooks-5)
 
+# 20. [TypeScript Notes](https://projects.100xdevs.com/tracks/6SbPPXGkG8QKFOTW9BmL/ts-1)
+
 
 
 
