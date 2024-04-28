@@ -2018,6 +2018,10 @@ const useDebounce = (value, delay) => {
 ![image](https://github.com/hiimvikash/reactjs/assets/71629248/171a4ac3-c0e2-4155-b9b4-5f6a031f111c)
 ![image](https://github.com/hiimvikash/reactjs/assets/71629248/3a6abb7b-073e-4299-bc93-b5b27e8e82b7)
 
+## **Zod - Infer type :** If you already have the ZOD schema to safeParse the body(from frontend) then what will be the typeOf(in TS) `req.body`.
+    ![image](https://github.com/hiimvikash/reactjs/assets/71629248/1fbbda2f-c8e1-4544-bc17-e458bc18fef2)
+
+
 
 
 
