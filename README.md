@@ -2008,7 +2008,17 @@ const useDebounce = (value, delay) => {
 ```
 # 19. [CustomHooks Notes](https://projects.100xdevs.com/tracks/3Vhp7rCJUVjnvFuPxZSZ/Custom-Hooks-5)
 
-# 20. [TypeScript Notes](https://projects.100xdevs.com/tracks/6SbPPXGkG8QKFOTW9BmL/ts-1)
+# 20. [TypeScript Notes - 1](https://projects.100xdevs.com/tracks/6SbPPXGkG8QKFOTW9BmL/ts-1), [ts Notes-2 APIs](https://projects.100xdevs.com/tracks/ts-hard/ts-hard-1)
+
+## Slide 6 - Interface
+**Assignment #2** - Create a React component that takes todos as an input and renders them
+![image](https://github.com/hiimvikash/reactjs/assets/71629248/aca6cbe5-7f6e-4a4d-801d-f4119188a03f)
+
+## Slide 7 - diff btw Interface and Types
+![image](https://github.com/hiimvikash/reactjs/assets/71629248/171a4ac3-c0e2-4155-b9b4-5f6a031f111c)
+![image](https://github.com/hiimvikash/reactjs/assets/71629248/3a6abb7b-073e-4299-bc93-b5b27e8e82b7)
+
+
 
 
 
