@@ -21,7 +21,16 @@ Here's a brief explanation in simple terms:
   - **Virtual DOM:** React uses a virtual DOM to efficiently update the UI. When data changes, React compares the virtual DOM with the real DOM and only updates the parts of the page that have changed. This approach minimizes the need for full-page reloads, which is essential for SPAs.
 
   - **Client-Side Routing:** React Router is a popular library used for client-side routing in React applications. It allows developers to define different "routes" within the application and render different components based on the URL. This enables SPAs to have multiple views without needing to reload new pages from the server.
-- components name should start with capital letters.  
+- components name should start with capital letters.
+
+# Reconciliation in React.js
+**Reconciliation is a core process in React that efficiently updates the actual DOM (Document Object Model) based on changes in the virtual DOM. It's the mechanism that allows React to maintain high performance while updating the user interface.**
+Here's how it works:
+1. Virtual DOM: React maintains a virtual representation of the real DOM, called the Virtual DOM. This is a lightweight copy of the actual DOM in memory.
+2. Change Detection: When a component's state or props change, React creates a new virtual DOM tree representing the desired UI state.
+3. Diffing Algorithm: React then compares the new virtual DOM with the previous one, identifying the differences between them. This process is called "diffing".
+4. Efficient Updates: React calculates the minimal set of changes needed to update the real DOM to match the new virtual DOM. This minimizes the number of expensive DOM operations, improving performance.
+5. Batching Updates: React batches multiple updates together and applies them in a single pass, further optimizing performance.
 # 01. Hello World App
 
 ```js
