@@ -303,8 +303,36 @@ function App() {
 - Only the JSX corresponding to the evaluated branch of the conditional logic is included in the final render output. Components in the other branch are not included in the output, but they have already been mounted and their lifecycle methods have been executed.
 - once useEffect are executed then it renders the component based on condition.
 
+# 5.1 Mounted Flag in code.
+## 5.1.1 Why Changing state while component is mounting or has unmounted is a PROBLEM for REACT ?
+### 1st Answer What does mounting means ? How is it different from rendering ?
+- **Rendering :** In this phase React is calculating JSX, building Virtual DOM Tree.
+- **Mounting :** Here JSX is put on the actual DOM and `useEffect(()=>{}, [])` is ran.
+<img width="558" alt="image" src="https://github.com/user-attachments/assets/04e4c2ec-b84f-4ddd-ba55-0daf8a83a842" />
+<img width="813" alt="image" src="https://github.com/user-attachments/assets/c6ca8ca4-3e0e-4af7-ad34-4be584374b1f" />
+<img width="797" alt="image" src="https://github.com/user-attachments/assets/5322dd22-4df8-4040-bf58-82c2457ea932" />
 
-# 5.1. Re-rendering in React
+## 5.1.2 When to use Mounted Flag ?
+- **Scenario 1 :** When you're changing the state variable of the component that hasn't mounted yet.
+- <img width="838" alt="image" src="https://github.com/user-attachments/assets/e41d42da-cabf-4861-b6f5-7fa5c8c59c17" />
+
+  - [**Example**](https://github.com/hiimvikash/git-jotter/blob/main/frontend/src/pages/Blogs.tsx). : Here, **ParentComponent** has a **ChildComponent** and that child component is doing async task which is updating his(cc) state variable then it shows warning like `"Can't perform a React state update on a component that hasn't mounted yet."`  WHY SO ?
+  - <img width="689" alt="image" src="https://github.com/user-attachments/assets/9ca58111-f4d1-4c2e-ac13-a12bd3b250b3" />
+  - <img width="737" alt="image" src="https://github.com/user-attachments/assets/24f36028-a9ff-4bb5-a247-3cba7502db90" />
+
+- **Scenario 2 :** When you're changing the state variable of the component that has unmounted
+  - <img width="834" alt="image" src="https://github.com/user-attachments/assets/04c50283-4983-4ca5-976c-9f3e531fecd0" />
+  - <img width="827" alt="image" src="https://github.com/user-attachments/assets/a2ef7068-d15e-4ce1-ac69-2278e23905d8" />
+
+
+
+
+
+
+
+
+
+# 5.2. Re-rendering in React
 A re-render means that
   1. React did some work to calculate what all should update in this component
   2. The component actually got called (you can put a log to confirm this)
