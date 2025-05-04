@@ -308,6 +308,8 @@ function App() {
 ### 1st Answer What does mounting means ? How is it different from rendering ?
 - **Rendering :** In this phase React is calculating JSX, building Virtual DOM Tree.
 - **Mounting :** Here JSX is put on the actual DOM and `useEffect(()=>{}, [])` is ran.
+- <img width="1136" alt="image" src="https://github.com/user-attachments/assets/d8a6b711-a0d8-48a8-8f00-66edbd7d6a68" />
+
 <img width="558" alt="image" src="https://github.com/user-attachments/assets/04e4c2ec-b84f-4ddd-ba55-0daf8a83a842" />
 <img width="813" alt="image" src="https://github.com/user-attachments/assets/c6ca8ca4-3e0e-4af7-ad34-4be584374b1f" />
 <img width="797" alt="image" src="https://github.com/user-attachments/assets/5322dd22-4df8-4040-bf58-82c2457ea932" />
