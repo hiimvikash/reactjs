@@ -470,6 +470,8 @@ memo lets you skip re-rendering a component when its props are unchanged.
       );
     }
     ```
+    <img width="872" alt="image" src="https://github.com/user-attachments/assets/6a88cf20-0f70-4779-a48e-b989c83eba1d" />
+
   - Managing focus, text selection, or other imperative operations.
   - Storing mutable values that are not part of the component state <b>like error handling of input values</b>
 
