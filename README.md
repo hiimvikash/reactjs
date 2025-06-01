@@ -1368,6 +1368,19 @@ export default function Content() {
 
 - [todoApp using Context-API + Local Storage](https://github.com/hiimvikash/react/tree/main/react11-todoApp)
 
+# 14.1 Dynamic Bundling / Code Splitting / Chunking / Lazy loading
+
+- Till now you will see your Full React application generates/load only one single JS file which contains full React application.
+- If your react application is small then, it's okay to have one JS file but when it's have 1000s of component and you need to build large scale application then you need **Dynamic Bundling.**
+- Is it a good way for large react application ? NO.
+- Let's take a scenario of the Swiggy App, they have different verticals in their APP like : "Food Delivery, DineIn, Instamart..etc" and its's doesn't have code splitting in their app.
+- Now any user how comes to just order a food, **need to wait for the whole `.js file` to load** from the server which contains all the components code and logic for every verticals.
+- Due to this, user may experience slow application.
+- Is there any way where we can **load our components lazily based on demand** ? this is where **Code Splitting** comes into the picture.
+- Here we just load the component in chunks which the user has requested instead of loading the js file for full application.
+![image](https://github.com/user-attachments/assets/f82794fa-f4ac-4f06-87db-555ba4aa0341)
+
+
 # 15. Redux-toolkit
 
 ## What is Redux ?
