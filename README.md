@@ -274,6 +274,7 @@ export default function Btn({color, setColor}){
 - [State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
 - [React Render](https://react.dev/learn/render-and-commit)
 - [State as a snapshot](https://react.dev/learn/state-as-a-snapshot)
+- [Batching updates](https://react.dev/learn/queueing-a-series-of-state-updates)
 - [useState()](https://react.dev/reference/react/useState)
 - always use `setSomething` **inside some eventhandler(like click events)** to avoid infinite loop
 - [invalid hook calls warning](https://react.dev/warnings/invalid-hook-call-warning)
